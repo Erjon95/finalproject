@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("#grid-container").load("login-register-as-seller.html"); 
+			});
+		});
+	</script> 
+    <title>Log in - Register</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<style>
+		body {
+			background-image: url('images/events-page-header-bg.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+		}
+		
+		#grid-container {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			padding: 10px;
+		}
+		
+		.grid-item {
+			background-color: rgba(255, 255, 255, 0.8);
+			border: 1px solid rgba(0, 0, 0, 0.8);
+			padding: 20px;
+			font-size: 30px;
+			text-align: center;
+		}
+		
+		.dropbtn {
+			background-color: #4CAF50;
+			color: white;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f1f1f1;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			z-index: 1;
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.dropdown-content a:hover {background-color: #ddd;}
+
+		.dropdown:hover .dropdown-content {display: block;}
+
+		.dropdown:hover .dropbtn {background-color: #3e8e41;}
+			
+	</style>
+	
+	
+</head>
+<body>
+
+<div id="grid-container">
+  <div class="grid-item">
+	<button>Log In as a Seller</button>
+	<h3 style = "text-align: left">Log in as a Buyer</h3>
+	<form method = "post">
+		<table>
+			<tr>
+				<td align = "left">Email:</td>
+				<td><input type="email" name="email" required></td>
+			</tr>
+			
+			<tr>
+				<td align = "left">Password:</td>
+				<td><input type="password" name="password" required></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Submit"></td>
+			</tr>
+		</table>
+	</form> 
+  </div>
+  <div class="grid-item">
+	<button>Register as a Seller</button>
+	<h3 style = "text-align: left">Register as a Buyer</h3>
+	
+	<form method = "post">
+		<table>
+			<tr>
+				<td align = "left">First Name:</td>
+				<td><input type="text" name="fname" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Last Name:</td>
+				<td><input type="text" name="lname" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Email:</td>
+				<td><input type="email" name="email" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Phone:</td>
+				<td><input type="tel" name="phone"></td>
+			</tr>
+			<tr>
+				<td align = "left">Address:</td>
+				<td><input type="text" name="address"></td>
+			</tr>
+			<tr>
+				<td align = "left">Password:</td>
+				<td><input type="password" name="password" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Confirm Password:</td>
+				<td><input type="password" name="confirmPassword" required></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Save"></td>
+			</tr>
+		</table>
+	</form> 
+  </div>
+  <div class = "dropdown" style = "position: relative; margin-left: 200px">
+	<input type = "submit" value = "Menu" class = "dropbtn">
+	<div class="dropdown-content">
+		<a href="events.html">Home</a>
+	</div>
+  </div>
+</div>
+
+
+</body>
+</html>

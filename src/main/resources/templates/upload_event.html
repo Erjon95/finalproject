@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <title>Upload Event</title>
+
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	
+	<style>
+		body {
+			background-image: url('images/events-page-header-bg.jpg');
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+			background-size: cover;
+		}
+		
+		#grid-container {
+			display: grid;
+			grid-template-columns: auto auto auto;
+			padding: 10px;
+		}
+		
+		.grid-item {
+			background-color: rgba(255, 255, 255, 0.8);
+			border: 1px solid rgba(0, 0, 0, 0.8);
+			padding: 20px;
+			font-size: 30px;
+			text-align: center;
+		}
+		
+		.dropbtn {
+			background-color: #4CAF50;
+			color: white;
+			padding: 16px;
+			font-size: 16px;
+			border: none;
+		}
+
+		.dropdown {
+			position: relative;
+			display: inline-block;
+		}
+
+		.dropdown-content {
+			display: none;
+			position: absolute;
+			background-color: #f1f1f1;
+			min-width: 160px;
+			box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+			z-index: 1;
+		}
+
+		.dropdown-content a {
+			color: black;
+			padding: 12px 16px;
+			text-decoration: none;
+			display: block;
+		}
+
+		.dropdown-content a:hover {background-color: #ddd;}
+
+		.dropdown:hover .dropdown-content {display: block;}
+
+		.dropdown:hover .dropbtn {background-color: #3e8e41;}
+			
+	</style>
+	
+	
+</head>
+<body>
+
+<div id="grid-container">
+
+  <h1>Upload An Event</h1>
+  
+  <div class="grid-item">
+	
+	<form action = "#" th:action="@{/upload_event}" th:object="${event}"method = "post">
+		<table>
+			<tr>
+				<td align = "left">Ticket Seller ID:</td>
+				<td><input type="text" th:field="*{ticketsellerid}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Title Of Event:</td>
+				<td><input type="text" th:field="*{titleofevent}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Place Of Event:</td>
+				<td><input type="text" th:field="*{placeofevent}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Description:</td>
+				<td><input type="text" th:field="*{description}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Start Date:</td>
+				<td><input type="text" th:field="*{startdate}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">End Date:</td>
+				<td><input type="text" th:field="*{enddate}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Time Of Show:</td>
+				<td><input type="text" th:field="*{localtimeofshow}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Ticket Price:</td>
+				<td><input type="text" th:field="*{priceofticket}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Number Of Tickets:</td>
+				<td><input type="text" th:field="*{numberoftickets}" required></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Upload"></td>
+			</tr>
+		</table>
+	</form> 
+  </div>
+</div>
+
+
+</body>
+</html>
+
