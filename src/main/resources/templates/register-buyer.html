@@ -9,7 +9,7 @@
 			});
 		});
 	</script> 
-    <title>Log in - Register</title>
+    <title>Register</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
 		
 		#grid-container {
 			display: grid;
-			grid-template-columns: auto auto auto;
+			grid-template-columns: auto auto;
 			padding: 10px;
 		}
 		
@@ -74,36 +74,16 @@
 			
 	</style>
 	
-	
 </head>
 <body>
 
 <div id="grid-container">
-  <div class="grid-item">
-
-	<h3 style = "text-align: left">Log in as a Buyer</h3>
-	<form action = "#" th:action="@{/index}" th:object="${ticketbuyer}" method = "post">
-		<table>
-			<tr>
-				<td align = "left">Email:</td>
-				<td><input type="email" th:field="*{email}" required></td>
-			</tr>
-			
-			<tr>
-				<td align = "left">Password:</td>
-				<td><input type="password" th:field="*{password}" required></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit"></td>
-			</tr>
-		</table>
-	</form> 
-  </div>
+  
   <div class="grid-item">
 	
 	<h3 style = "text-align: left">Register as a Buyer</h3>
 	
-	<form action = "#" th:action="@{/login-register}" th:object="${ticketbuyer}" method = "post">
+	<form action = "#" th:action="@{/register-buyer}" th:object="${ticketbuyer}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">First Name:</td>

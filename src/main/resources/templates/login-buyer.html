@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Log in - Register</title>
+    <title>Log in</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -74,7 +74,7 @@
   <div class="grid-item">
 
 	<h3 style = "text-align: left">Log in as a Buyer</h3>
-	<form action = "#" th:action="@{/index}" th:object="${ticketbuyer}" method = "post">
+	<form action = "#" th:action="@{/login-buyer}" th:object="${ticketbuyer}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">Email:</td>
