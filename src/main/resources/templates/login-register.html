@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<script type="text/javascript"> 
@@ -80,18 +80,18 @@
 
 <div id="grid-container">
   <div class="grid-item">
-	<button>Log In as a Seller</button>
+
 	<h3 style = "text-align: left">Log in as a Buyer</h3>
-	<form method = "post">
+	<form action = "#" th:action="@{/index}" th:object="${ticketbuyer}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">Email:</td>
-				<td><input type="email" name="email" required></td>
+				<td><input type="email" th:field="*{email}" required></td>
 			</tr>
 			
 			<tr>
 				<td align = "left">Password:</td>
-				<td><input type="password" name="password" required></td>
+				<td><input type="password" th:field="*{password}" required></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Submit"></td>
@@ -100,38 +100,34 @@
 	</form> 
   </div>
   <div class="grid-item">
-	<button>Register as a Seller</button>
+	
 	<h3 style = "text-align: left">Register as a Buyer</h3>
 	
-	<form method = "post">
+	<form action = "#" th:action="@{/login-register}" th:object="${ticketbuyer}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">First Name:</td>
-				<td><input type="text" name="fname" required></td>
+				<td><input type="text" th:field="*{firstname}" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Last Name:</td>
-				<td><input type="text" name="lname" required></td>
+				<td><input type="text" th:field="*{lastname}" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Email:</td>
-				<td><input type="email" name="email" required></td>
+				<td><input type="email" th:field="*{email}" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Phone:</td>
-				<td><input type="tel" name="phone"></td>
+				<td><input type="tel" th:field="*{phone}"></td>
 			</tr>
 			<tr>
 				<td align = "left">Address:</td>
-				<td><input type="text" name="address"></td>
+				<td><input type="text" th:field="*{address}" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Password:</td>
 				<td><input type="password" name="password" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Confirm Password:</td>
-				<td><input type="password" name="confirmPassword" required></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Save"></td>

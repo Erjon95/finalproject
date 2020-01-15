@@ -11,11 +11,21 @@ public class TicketBuyer {
     @Id
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
+
     private String firstname;
     private String lastname;
     private String address;
     private String email;
     private String phone;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;

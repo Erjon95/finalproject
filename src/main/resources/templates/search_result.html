@@ -131,7 +131,7 @@
 				<th>End Date</th>
 				<th>Time Of Show</th>
 				<th>Price</th>
-				<th>Buy  </th>
+				<th style = "width : 15%">Buy</th>
 				
 			</tr>
         </thead>
@@ -139,26 +139,28 @@
 			<tr th:each="event : ${events}">
 				<td th:text="${event.titleofevent}"></td>
 				
-				<td th:text="${event.placeofevent}">Place Of Event</td>
+				<td th:text="${event.placeofevent}"></td>
 				
-				<td th:text="${event.description}">Description</td>
+				<td th:text="${event.description}"></td>
 				
-				<td th:text="${event.startdate}">Start Date</td>
+				<td th:text="${event.startdate}"></td>
 				
-				<td th:text="${event.enddate}">End Date</td>
+				<td th:text="${event.enddate}"></td>
 				
-				<td th:text="${event.localtimeofshow}">Time Of Show</td>
+				<td th:text="${event.localtimeofshow}"></td>
 				
-				<td th:text="${event.priceofticket}">Price</td>
+				<td th:text="${event.priceofticket}"></td>
 				
-				<td><button font-size = "10px" onclick = "function()">Buy</button></td>
+				<td><form action = "#" th:action="@{/buy_result}" method = "post">
+						<input type = "submit" value = "Buy" style = "width : 80%"/>
+					</form>
+				</td>
 			
 			</tr>
 		</tbody>
 	</table>
   </div>
 </div>
-
 </body>
 </html>
 

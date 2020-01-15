@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Search</title>
+    <title>Log in - Register</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -71,47 +71,25 @@
 <body>
 
 <div id="grid-container">
-
-  <h1>Search For Events</h1>
-  
   <div class="grid-item">
-	
-	<form action = "#" th:action="@{/search_result}" th:object="${event}"method = "post">
+
+	<h3 style = "text-align: left">Log in as a Buyer</h3>
+	<form action = "#" th:action="@{/index}" th:object="${ticketbuyer}" method = "post">
 		<table>
 			<tr>
-				<td align = "left">Title Of Event:</td>
-				<td><input type="text" th:field="*{titleofevent}"></td>
+				<td align = "left">Email:</td>
+				<td><input type="email" th:field="*{email}" required></td>
+			</tr>
+			
+			<tr>
+				<td align = "left">Password:</td>
+				<td><input type="password" th:field="*{password}" required></td>
 			</tr>
 			<tr>
-				<td align = "left">Place Of Event:</td>
-				<td><input type="text" th:field="*{placeofevent}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Description:</td>
-				<td><input type="text" th:field="*{description}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Start Date:</td>
-				<td><input type="text" th:field="*{startdate}"></td>
-			</tr>
-			<tr>
-				<td align = "left">End Date:</td>
-				<td><input type="text" th:field="*{enddate}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Time Of Show:</td>
-				<td><input type="text" th:field="*{localtimeofshow}"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Search"></td>
+				<td><input type="submit" value="Submit"></td>
 			</tr>
 		</table>
 	</form> 
   </div>
-</div>
-
-
-</body>
-</html>
-
-
+ </body>
+ </html>
