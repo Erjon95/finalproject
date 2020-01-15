@@ -1,15 +1,8 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-	<script type="text/javascript"> 
-		$(document).ready(function(){
-			$("button").click(function(){
-				$("#grid-container").load("login-register.html"); 
-			});
-		});
-	</script> 
-    <title>Log in - Register</title>
+	
+    <title>Register</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,7 +18,7 @@
 		
 		.grid-container {
 			display: grid;
-			grid-template-columns: auto auto auto;
+			grid-template-columns: auto auto;
 			padding: 10px;
 		}
 		
@@ -77,63 +70,40 @@
 <body>
 
 <div class="grid-container">
-  <div class="grid-item">
   
-	<h3 style = "text-align: left">Log in as a Seller</h3>
-	<form method = "post">
-		<table>
-			<tr>
-				<td align = "left">Organization Name:</td>
-				<td><input type="text" name="orgName" required></td>
-			</tr>
-			
-			<tr>
-				<td align = "left">Password:</td>
-				<td><input type="password" name="password" required></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Submit"></td>
-			</tr>
-		</table>
-	</form> 
-  </div>
   <div class="grid-item">
 	
 	<h3 style = "text-align: left">Register as a Seller</h3>
 	
-	<form method = "post">
+	<form action = "#" th:action="@{/register-seller}" th:object="${ticketseller}" method = "post">
 		<table>
 			<tr>
-				<td align = "left">First Name:</td>
-				<td><input type="text" name="fname" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Last Name:</td>
-				<td><input type="text" name="lname" required></td>
-			</tr>
-			<tr>
 				<td align = "left">Organization Name:</td>
-				<td><input type="text" name="orgName" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Email:</td>
-				<td><input type="email" name="email" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Phone:</td>
-				<td><input type="tel" name="phone"></td>
+				<td><input type="text" th:field="*{orgname}" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Address:</td>
-				<td><input type="text" name="address"></td>
+				<td><input type="text" th:field="*{orgaddress}" required></td>
 			</tr>
 			<tr>
-				<td align = "left">Password:</td>
-				<td><input type="password" name="password" required></td>
+				<td align = "left">Web Address:</td>
+				<td><input type="text" th:field="*{webaddress}" required></td>
 			</tr>
 			<tr>
-				<td align = "left">Confirm Password:</td>
-				<td><input type="password" name="confirmPassword" required></td>
+				<td align = "left">Contact First Name:</td>
+				<td><input type="text" th:field="*{contactfirstname}"></td>
+			</tr>
+			<tr>
+				<td align = "left">Contact Last Name:</td>
+				<td><input type="text" th:field="*{contactlastname}"></td>
+			</tr>
+			<tr>
+				<td align = "left">Email:</td>
+				<td><input type="email" th:field="*{contactemail}" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Phone:</td>
+				<td><input type="text" th:field="*{contactphone}"></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Save"></td>

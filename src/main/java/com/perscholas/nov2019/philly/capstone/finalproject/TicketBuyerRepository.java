@@ -1,5 +1,6 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

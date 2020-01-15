@@ -19,6 +19,15 @@ public class TicketSeller {
     private String webaddress;
     private String contactemail;
     private String contactphone;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public Integer getId() {
         return id;
