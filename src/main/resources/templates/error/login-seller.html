@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
 	
-    <title>Register</title>
+    <title>Log In</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -70,47 +70,23 @@
 <body>
 
 <div class="grid-container">
+
+   <div class="grid-item">
   
-  <div class="grid-item">
-	
-	<h3 style = "text-align: left">Register as a Seller</h3>
-	
-	<form action = "#" th:action="@{/register-seller}" th:object="${ticketseller}" method = "post">
+	<h3 style = "text-align: left">The organization name and password provided are not recognized. Please, try again.</h3>
+	<form action = "#" th:action="@{/error_login-seller}" th:object="${ticketseller}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">Organization Name:</td>
 				<td><input type="text" th:field="*{orgname}" required></td>
 			</tr>
-			<tr>
-				<td align = "left">Address:</td>
-				<td><input type="text" th:field="*{orgaddress}" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Web Address:</td>
-				<td><input type="text" th:field="*{webaddress}" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Contact First Name:</td>
-				<td><input type="text" th:field="*{contactfirstname}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Contact Last Name:</td>
-				<td><input type="text" th:field="*{contactlastname}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Email:</td>
-				<td><input type="email" th:field="*{contactemail}" required></td>
-			</tr>
-			<tr>
-				<td align = "left">Phone:</td>
-				<td><input type="text" th:field="*{contactphone}"></td>
-			</tr>
+			
 			<tr>
 				<td align = "left">Password:</td>
 				<td><input type="password" th:field="*{password}" required></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Save"></td>
+				<td><input type="submit" value="Submit"></td>
 			</tr>
 		</table>
 	</form> 
@@ -119,8 +95,8 @@
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
 		<a href="events.html">Home</a>
-	</div>
   </div>
-</div>
+  </div>
+ </div>
 </body>
 </html>
