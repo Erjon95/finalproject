@@ -1,41 +1,3 @@
-<!--<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="utf-8"/>
-<title>Product Manager</title>
-</head>
-<body>
-<div align="center">
-    <h1>Event Info</h1>
-    <br/><br/>
-    <table border="1" cellpadding="10">
-        <thead>
-            <tr>
-				<th>Event</th>
-			</tr>
-        </thead>
-        <tbody>
-            <tr th:each="event : ${events}">
-				<td th:text="${event.id}">ID</td>
-				<td th:text="${event.ticketsellerid}">Ticket Seller Id</td>
-				<td th:text="${event.titleofevent}">Title</td>
-				<td th:text="${event.placeofevent}">Place</td>
-				<td th:text="${event.description}">Picture</td>
-				<td th:text="${event.startdate}">Start Date</td>
-				<td th:text="${event.enddate}">End Date</td>
-				<td th:text="${event.localtimeofshow}">Time</td>
-				<td th:text="${event.priceofticket}">Price</td>
-                <!--<td th:img src="${event.picture}">Picture</td>
-				<td th:text="${event.numberoftickets}"># Tickets</td>
-				<td th:text="${event.timestamp}">Timestamp</td>
-            </tr>
-        </tbody>
-    </table>
-</div>   
-</body>
-</html>-->
-
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
@@ -152,10 +114,9 @@
 				<td th:text="${event.priceofticket}"></td>
 				
 				<td><form action = "#" th:action="@{/buy_result}" method = "post">
-						<input type = "submit" value = "Buy" style = "width : 80%"/>
+						<button type = "submit" th:name = "eventid" th:value = "${event.id}" style = "width : 80%"/>Buy</button>
 					</form>
 				</td>
-			
 			</tr>
 		</tbody>
 	</table>
