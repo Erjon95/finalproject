@@ -11,6 +11,9 @@ import java.util.List;
 
 public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integer> {
 
+    @Query(value = "select tb.id from TicketBuyer tb where tb.email = ?1", nativeQuery = true)
+    Integer findBuyerId(String email);
+
     @Query(value = "select * from TicketBuyer tb", nativeQuery = true)
     List<TicketBuyer> findBuyers();
 

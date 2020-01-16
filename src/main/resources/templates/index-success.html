@@ -73,6 +73,7 @@
 <div id="grid-container">
 
   <div class="grid-item">
+    <h3>Your order was processed successfully</h3>
 	<h3>Search For Events</h3>
 	
 	<form action = "#" th:action="@{/search_result}" th:object="${event}"method = "post">
@@ -110,8 +111,8 @@
   <div class = "dropdown" style = "position: relative; margin-left: 300px">
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
-		<a href="login-buyer">Log In</a>
-		<a href="account">My Account</a>
+		<a href="account">Account</a>
+		<a href="/">Log Out</a>
 	</div>
   </div>
 </div>
