@@ -20,7 +20,4 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
     @Modifying
     @Query(value = "insert into event(ticketsellerid, titleofevent, placeofevent, description, startdate, enddate, localtimeofshow, priceofticket, numberoftickets) values(:ticketsellerid, :titleofevent, :placeofevent, :description, :startdate, :enddate, :localtimeofshow, :priceofticket, :numberoftickets)", nativeQuery = true)
     void insertEvent(@Param("ticketsellerid") Integer ticketsellerid, @Param("titleofevent") String titleofevent, @Param("placeofevent") String placeofevent, @Param("description") String description, @Param("startdate") String startdate, @Param("enddate") String enddate, @Param("localtimeofshow") String localtimeofshow, @Param("priceofticket") String priceofticket, @Param("numberoftickets") Integer numberoftickets);
-
-
-
 }

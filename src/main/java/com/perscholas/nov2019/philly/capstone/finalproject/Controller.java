@@ -5,6 +5,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @org.springframework.stereotype.Controller    // This means that this class is a Controller
 @RequestMapping(path="/") // This means URL's start with / (after Application path)
@@ -34,38 +35,38 @@ public class  Controller {
     private SellerService sellerService = new SellerService();
 
     //search for events
+
     /*************************************************************************************************************************************************************************************************/
-    @GetMapping(path="/")
+    @GetMapping(path = "/")
     public String setUpForm(Model model) {
         model.addAttribute("event", new Event());
         return "index";
     }
 
-    @PostMapping(path="/search_result")
+    @PostMapping(path = "/search_result")
     public String searchEvents(Event event, Model model) {
 
         List<Event> events = eventRepository.findEvents(event.getTitleofevent(), event.getPlaceofevent(), event.getDescription(), event.getStartdate(), event.getEnddate(), event.getLocaltimeofshow());
 
-        if (eventService.isThere(event.getTitleofevent(), events))
-        {
+        if (eventService.isThere(event.getTitleofevent(), events)) {
             model.addAttribute("events", events);
             return "search_result";
-        }
-        else
+        } else
             return "index";
     }
     /******************************************************************************************************************************************************************************************************/
 
     //register a buyer
+
     /****************************************************************************************************************************************************************************************/
 
-    @GetMapping(path="/register-buyer")
+    @GetMapping(path = "/register-buyer")
     public String setUpRegistrationForBuyer(Model model) {
         model.addAttribute("ticketbuyer", new TicketBuyer());
         return "register-buyer";
     }
 
-    @PostMapping(path="/register-buyer")
+    @PostMapping(path = "/register-buyer")
     public String registerBuyer(@ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer) {
 
         List<TicketBuyer> lt = ticketBuyerRepository.findBuyers();
@@ -75,23 +76,22 @@ public class  Controller {
 
         String hashedPwd = buyerService.hashPassword(ticketBuyer.getPassword());
 
-        try
-        {
+        try {
             ticketBuyerRepository.registerBuyer(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), hashedPwd);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "login-buyer";
     }
 
-    @GetMapping(path="/error/register-buyer")
+    @GetMapping(path = "/error/register-buyer")
     public String setupRegisterAgainBuyer(Model model) {
         model.addAttribute("ticketbuyer", new TicketBuyer());
         return "error/register-buyer";
     }
 
-    @PostMapping(path="/error/register-buyer")
+    @PostMapping(path = "/error/register-buyer")
     public String registerAgainBuyer(@ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer) {
 
         List<TicketBuyer> lt = ticketBuyerRepository.findBuyers();
@@ -101,10 +101,9 @@ public class  Controller {
 
         String hashedPwd = buyerService.hashPassword(ticketBuyer.getPassword());
 
-        try
-        {
+        try {
             ticketBuyerRepository.registerBuyer(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), hashedPwd);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -113,14 +112,15 @@ public class  Controller {
     /*******************************************************************************************************************************************************************************************/
 
     // A ticket buyer logs in.
+
     /***********************************************************************************************************************/
-    @GetMapping(path="/login-buyer")
+    @GetMapping(path = "/login-buyer")
     public String setUpLoginForBuyer(Model model) {
         model.addAttribute("ticketbuyer", new TicketBuyer());
         return "login-buyer";
     }
 
-    @PostMapping(path="/login-buyer")
+    @PostMapping(path = "/login-buyer")
     public String loginBuyer(@ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer, @ModelAttribute("event") Event event) {
         List<TicketBuyer> lt = ticketBuyerRepository.findBuyers();
 
@@ -132,13 +132,13 @@ public class  Controller {
         return "error/login-buyer";
     }
 
-    @GetMapping(path="/error/login-buyer")
+    @GetMapping(path = "/error/login-buyer")
     public String setUpLoginAgainBuyer(Model model) {
         model.addAttribute("ticketbuyer", new TicketBuyer());
         return "login-buyer";
     }
 
-    @PostMapping(path="/error/login-buyer")
+    @PostMapping(path = "/error/login-buyer")
     public String loginAgainBuyer(@ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer, @ModelAttribute("event") Event event) {
         List<TicketBuyer> lt = ticketBuyerRepository.findBuyers();
 
@@ -152,15 +152,16 @@ public class  Controller {
     /***************************************************************************************************************************/
 
     //A seller registers.
+
     /****************************************************************************************************************************************************************************************************************************************************************************************/
 
-    @GetMapping(path="/register-seller")
+    @GetMapping(path = "/register-seller")
     public String setUpRegistrationForSeller(Model model) {
         model.addAttribute("ticketseller", new TicketSeller());
         return "register-seller";
     }
 
-    @PostMapping(path="/register-seller")
+    @PostMapping(path = "/register-seller")
     public String registerSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller) {
         List<TicketSeller> lt = ticketSellerRepository.findSellers();
 
@@ -169,23 +170,22 @@ public class  Controller {
 
         String hashedPwd = sellerService.hashPassword(ticketSeller.getPassword());
 
-        try
-        {
+        try {
             ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "login-seller";
     }
 
-    @GetMapping(path="/error/register-seller")
+    @GetMapping(path = "/error/register-seller")
     public String setUpRegistrationAgainSeller(Model model) {
         model.addAttribute("ticketseller", new TicketSeller());
         return "error/register-seller";
     }
 
-    @PostMapping(path="/error/register-seller")
+    @PostMapping(path = "/error/register-seller")
     public String registerAgainSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller) {
         List<TicketSeller> lt = ticketSellerRepository.findSellers();
 
@@ -194,10 +194,9 @@ public class  Controller {
 
         String hashedPwd = sellerService.hashPassword(ticketSeller.getPassword());
 
-        try
-        {
+        try {
             ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd);
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -206,14 +205,15 @@ public class  Controller {
     /***************************************************************************************************************************************************************************************************************************************************************************************/
 
     //A seller logs in.
+
     /*****************************************************************************************************************************************/
-    @GetMapping(path="/login-seller")
+    @GetMapping(path = "/login-seller")
     public String setUpLoginForSeller(Model model) {
         model.addAttribute("ticketseller", new TicketSeller());
         return "login-seller";
     }
 
-    @PostMapping(path="/login-seller")
+    @PostMapping(path = "/login-seller")
     public String loginSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event) {
         List<TicketSeller> lt = ticketSellerRepository.findSellers();
 
@@ -223,13 +223,13 @@ public class  Controller {
         return "error/login-seller";
     }
 
-    @GetMapping(path="/error/login-seller")
+    @GetMapping(path = "/error/login-seller")
     public String setUpLoginAgainSeller(Model model) {
         model.addAttribute("ticketseller", new TicketSeller());
         return "error/login-seller";
     }
 
-    @PostMapping(path="/error_login-seller")
+    @PostMapping(path = "/error_login-seller")
     public String loginAgainSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event) {
         List<TicketSeller> lt = ticketSellerRepository.findSellers();
 
@@ -241,20 +241,20 @@ public class  Controller {
     /******************************************************************************************************************************************/
 
     //A ticket seller uploads an event.
+
     /********************************************************************************************************************************************************************************************************/
-    @GetMapping(path="/upload_event")
+    @GetMapping(path = "/upload_event")
     public String uploadEvent(Model model) {
         model.addAttribute("event", new Event());
         return "upload_event";
     }
 
-    @PostMapping(path="/upload_event")
+    @PostMapping(path = "/upload_event")
     public String handleUpload(@ModelAttribute("event") Event event) {
 
-        try
-        {
+        try {
             eventRepository.insertEvent(event.getTicketsellerid(), event.getTitleofevent(), event.getPlaceofevent(), event.getDescription(), event.getStartdate(), event.getEnddate(), event.getLocaltimeofshow(), event.getPriceofticket(), event.getNumberoftickets());
-        }catch (Exception e){
+        } catch (Exception e) {
             e.printStackTrace();
         }
 
@@ -263,11 +263,12 @@ public class  Controller {
     /*********************************************************************************************************************************************************************************************************************************************************************/
 
     //A ticket buyer buys a ticket
+
     /*****************************************************************************************************************************************************************/
-    @PostMapping(path="/buy_result")
+    @PostMapping(path = "/buy_result")
     public String buyResult(@RequestParam("eventid") Integer eventId, @ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer, @ModelAttribute("event") Event event) {
 
-        if(ticketBuyerId == -1)
+        if (ticketBuyerId == -1)
             return "login-buyer";
 
         if (ticketBuyerId != -1) {
@@ -279,10 +280,35 @@ public class  Controller {
     }
     /******************************************************************************************************************************************************************/
 
+    //A buyer logs out.
+
+    /***********************************/
     @GetMapping(path = "/userlogout")
-    public String logOutBuyer ()
-    {
+    public String logOutBuyer() {
         ticketBuyerId = -1;
         return "userlogout";
+    }
+
+    /*********************************/
+
+    @GetMapping(path = "/user-account")
+    public String accountBuyer(Model model) {
+        TicketBuyer ticketBuyer = ticketBuyerRepository.findBuyer(ticketBuyerId);
+        model.addAttribute("ticketbuyer", ticketBuyer);
+        return "user-account";
+    }
+
+    @GetMapping(path = "/edit-buyer")
+    public String editBuyer(Model model, TicketBuyer ticketBuyer) {
+
+        model.addAttribute("ticketbuyer", new TicketBuyer());
+        return "edit-buyer";
+    }
+
+    @PatchMapping(path = "/edit-buyer")
+    public String updateBuyer(Model model, TicketBuyer ticketBuyer) {
+
+        model.addAttribute("ticketbuyer", new TicketBuyer());
+        return "edit-buyer";
     }
 }

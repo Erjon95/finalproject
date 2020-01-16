@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Search</title>
+    <title>Edit User Info</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -25,7 +25,7 @@
 			background-color: rgba(255, 255, 255, 0.8);
 			border: 1px solid rgba(0, 0, 0, 0.8);
 			padding: 20px;
-			font-size: 30px;
+			font-size: 15px;
 			text-align: center;
 		}
 		
@@ -63,46 +63,93 @@
 		.dropdown:hover .dropdown-content {display: block;}
 
 		.dropdown:hover .dropbtn {background-color: #3e8e41;}
+		
+		table{
+			border-collapse:collapse;
+			border:1px solid #FF0000;
+		}
+		
+		table td{
+			border:1px solid #FF0000;
+		}
 			
 	</style>
-	
 	
 </head>
 <body>
 
 <div id="grid-container">
 
+<h3>Buyer Info</h3>
+  
   <div class="grid-item">
-	<h3>Search For Events</h3>
 	
-	<form action = "#" th:action="@{/search_result}" th:object="${event}"method = "post">
+	<table>
+		<thead>
+            <tr>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Address</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Edit</th>
+			</tr>
+        </thead>
+		<tbody>
+			<tr>
+				<td th:text="${ticketbuyer.firstname}"></td>
+				
+				<td th:text="${ticketbuyer.lastname}"></td>
+				
+				<td th:text="${ticketbuyer.address}"></td>
+				
+				<td th:text="${ticketbuyer.email}"></td>
+				
+				<td th:text="${ticketbuyer.phone}"></td>
+				
+				<td><form action = "#" th:action="@{/edit-buyer}" method = "post">
+						<button type = "submit" style = "width : 100%"/>Edit</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</div>
+</div>
+</body>
+</html>
+
+  <!--<div class="grid-item">
+	<h3>Edit</h3>
+	
+	<form action = "#" th:action="@{/search_result}" th:object="${ticketbuyer}"method = "post">
 		<table>
 			<tr>
-				<td align = "left">Title Of Event:</td>
-				<td><input type="text" th:field="*{titleofevent}"></td>
+				<td align = "left">First Name:</td>
+				<td><input type="text" th:field="*{firstname}"></td>
 			</tr>
 			<tr>
-				<td align = "left">Place Of Event:</td>
-				<td><input type="text" th:field="*{placeofevent}"></td>
+				<td align = "left">Last Name:</td>
+				<td><input type="text" th:field="*{lastname}"></td>
 			</tr>
 			<tr> 
-				<td align = "left">Description:</td>
-				<td><input type="text" th:field="*{description}"></td>
+				<td align = "left">Address:</td>
+				<td><input type="text" th:field="*{address}"></td>
 			</tr>
 			<tr>
-				<td align = "left">Start Date:</td>
-				<td><input type="text" th:field="*{startdate}"></td>
+				<td align = "left">Email:</td>
+				<td><input type="text" th:field="*{email}"></td>
 			</tr>
 			<tr>
-				<td align = "left">End Date:</td>
-				<td><input type="text" th:field="*{enddate}"></td>
+				<td align = "left">Phone:</td>
+				<td><input type="text" th:field="*{phone}"></td>
 			</tr>
 			<tr>
-				<td align = "left">Time Of Show:</td>
-				<td><input type="text" th:field="*{localtimeofshow}"></td>
+				<td align = "left">Password:</td>
+				<td><input type="text" th:field="*{password}"></td>
 			</tr>
 			<tr>
-				<td><input type="submit" value="Search"></td>
+				<td><input type="submit" value="Save"></td>
 			</tr>
 		</table>
 	</form> 
@@ -110,15 +157,13 @@
   <div class = "dropdown" style = "position: relative; margin-left: 300px">
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
-		<a href="user-account">My Account</a>
+		<a href="account">My Account</a>
+		<a href="/">Search</a>
 		<a href="userlogout">Log Out</a>
-		
 	</div>
   </div>
 </div>
 
 
 </body>
-</html>
-
-
+</html>-->
