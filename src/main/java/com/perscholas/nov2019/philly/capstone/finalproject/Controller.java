@@ -49,7 +49,10 @@ public class  Controller {
 
         if (eventService.isThere(event.getTitleofevent(), events)) {
             model.addAttribute("events", events);
-            return "search_result";
+            if (ticketBuyerId == -1)
+                return "search_result";
+            else
+                return "search_result-loggedin";
         } else
             return "index";
     }
@@ -279,7 +282,7 @@ public class  Controller {
     }
     /******************************************************************************************************************************************************************/
 
-    //A buyer logs out.
+    // A buyer logs out.
     /***********************************/
     @GetMapping(path = "/userlogout")
     public String logOutBuyer() {
@@ -288,19 +291,18 @@ public class  Controller {
     }
     /*********************************/
 
-    @GetMapping(path = "/user-account")
+    //Buyers visit their "account" page
+    /********************************************************************************/
+    @GetMapping(path = "/buyer-account")
     public String accountBuyer(Model model) {
         TicketBuyer ticketBuyer = ticketBuyerRepository.findBuyerById(ticketBuyerId);
         model.addAttribute("ticketbuyer", ticketBuyer);
-        return "user-account";
+        return "buyer-account";
     }
+    /********************************************************************************/
 
-    /*@PostMapping(path = "/edit-buyer")
-    public String editBuyer(Model model) {
-        model.addAttribute("ticketbuyer", new TicketBuyer());
-        return "edit-buyer";
-    }*/
-
+    //Buyers edit their accounts
+    /*********************************************************************************/
     @GetMapping(path = "/edit-buyer")
     public String editBuyer(Model model) {
 
@@ -308,7 +310,7 @@ public class  Controller {
         return "edit-buyer";
     }
 
-    @PostMapping(path = "/user-account")
+    @PostMapping(path = "/buyer-account")
     public String updateBuyer(Model model, TicketBuyer ticketBuyer) {
 
         buyerService.firstNameEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository);
@@ -329,6 +331,7 @@ public class  Controller {
 
         model.addAttribute("ticketbuyer", tb);
 
-        return "user-account";
+        return "buyer-account";
     }
+    /*************************************************************************************************************************************************************************************************************/
 }

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Search</title>
+    <title>Search Results</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -17,7 +17,7 @@
 		
 		#grid-container {
 			display: grid;
-			grid-template-columns: auto auto;
+			grid-template-columns: auto;
 			padding: 10px;
 		}
 		
@@ -25,7 +25,7 @@
 			background-color: rgba(255, 255, 255, 0.8);
 			border: 1px solid rgba(0, 0, 0, 0.8);
 			padding: 20px;
-			font-size: 30px;
+			font-size: 20px;
 			text-align: center;
 		}
 		
@@ -64,60 +64,73 @@
 
 		.dropdown:hover .dropbtn {background-color: #3e8e41;}
 			
+		table{
+			border-collapse:collapse;
+			border:1px solid #FF0000;
+		}
+		
+		table td{
+			border:1px solid #FF0000;
+		}
 	</style>
-	
 	
 </head>
 <body>
 
 <div id="grid-container">
 
+  <h1>Event Info</h1>
+  
   <div class="grid-item">
-	<h3>Search For Events</h3>
 	
-	<form action = "#" th:action="@{/search_result}" th:object="${event}"method = "post">
-		<table>
-			<tr>
-				<td align = "left">Title Of Event:</td>
-				<td><input type="text" th:field="*{titleofevent}"></td>
+	<table>
+		<thead>
+            <tr>
+				<th>Title Of Event</th>
+				<th>Place Of Event</th>
+				<th>Description</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Time Of Show</th>
+				<th>Price</th>
+				<th style = "width : 15%">Buy</th>
+				
 			</tr>
-			<tr>
-				<td align = "left">Place Of Event:</td>
-				<td><input type="text" th:field="*{placeofevent}"></td>
+        </thead>
+		<tbody>
+			<tr th:each="event : ${events}">
+				<td th:text="${event.titleofevent}"></td>
+				
+				<td th:text="${event.placeofevent}"></td>
+				
+				<td th:text="${event.description}"></td>
+				
+				<td th:text="${event.startdate}"></td>
+				
+				<td th:text="${event.enddate}"></td>
+				
+				<td th:text="${event.localtimeofshow}"></td>
+				
+				<td th:text="${event.priceofticket}"></td>
+				
+				<td><form action = "#" th:action="@{/buy_result}" method = "post">
+						<button type = "submit" th:name = "eventid" th:value = "${event.id}" style = "width : 80%"/>Buy</button>
+					</form>
+				</td>
 			</tr>
-			<tr> 
-				<td align = "left">Description:</td>
-				<td><input type="text" th:field="*{description}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Start Date:</td>
-				<td><input type="text" th:field="*{startdate}"></td>
-			</tr>
-			<tr>
-				<td align = "left">End Date:</td>
-				<td><input type="text" th:field="*{enddate}"></td>
-			</tr>
-			<tr>
-				<td align = "left">Time Of Show:</td>
-				<td><input type="text" th:field="*{localtimeofshow}"></td>
-			</tr>
-			<tr>
-				<td><input type="submit" value="Search"></td>
-			</tr>
-		</table>
-	</form> 
+		</tbody>
+	</table>
   </div>
-  <div class = "dropdown" style = "position: relative; margin-left: 300px">
+  <div class = "dropdown" style = "position: relative; margin-left: 200px">
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
+		<a href="/">Search</a>
 		<a href="buyer-account">My Account</a>
+		<a href="/">Search</a>
 		<a href="userlogout">Log Out</a>
-		
 	</div>
   </div>
 </div>
-
-
 </body>
 </html>
 
