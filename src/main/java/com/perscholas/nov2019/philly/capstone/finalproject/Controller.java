@@ -1,6 +1,11 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
+import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
@@ -281,34 +286,49 @@ public class  Controller {
     /******************************************************************************************************************************************************************/
 
     //A buyer logs out.
-
     /***********************************/
     @GetMapping(path = "/userlogout")
     public String logOutBuyer() {
         ticketBuyerId = -1;
         return "userlogout";
     }
-
     /*********************************/
 
     @GetMapping(path = "/user-account")
     public String accountBuyer(Model model) {
-        TicketBuyer ticketBuyer = ticketBuyerRepository.findBuyer(ticketBuyerId);
+        TicketBuyer ticketBuyer = ticketBuyerRepository.findBuyerById(ticketBuyerId);
         model.addAttribute("ticketbuyer", ticketBuyer);
         return "user-account";
     }
 
+    /*@PostMapping(path = "/edit-buyer")
+    public String editBuyer(Model model) {
+        model.addAttribute("ticketbuyer", new TicketBuyer());
+        return "edit-buyer";
+    }*/
+
     @GetMapping(path = "/edit-buyer")
-    public String editBuyer(Model model, TicketBuyer ticketBuyer) {
+    public String editBuyer(Model model) {
 
         model.addAttribute("ticketbuyer", new TicketBuyer());
         return "edit-buyer";
     }
 
-    @PatchMapping(path = "/edit-buyer")
+    @PostMapping(path = "/user-account")
     public String updateBuyer(Model model, TicketBuyer ticketBuyer) {
 
-        model.addAttribute("ticketbuyer", new TicketBuyer());
-        return "edit-buyer";
+        String password;
+
+        buyerService.isNull(ticketBuyer, ticketBuyerId);
+
+        String hashedPwd = BCrypt.
+
+        ticketBuyerRepository.update(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), ticketBuyer.getPassword(), ticketBuyerId);
+        TicketBuyer tb = ticketBuyerRepository.findBuyerById(ticketBuyerId);
+
+        model.addAttribute("ticketbuyer", tb);
+
+
+        return "user-account";
     }
 }

@@ -4,6 +4,7 @@ import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;
 
+@org.springframework.stereotype.Service
 public class SellerService extends Service {
 
     public boolean isThere(String orgname, String password, List<TicketSeller> ls) {

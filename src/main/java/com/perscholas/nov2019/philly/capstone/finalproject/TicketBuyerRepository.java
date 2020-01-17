@@ -15,10 +15,28 @@ public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integ
     Integer findBuyerId(String email);
 
     @Query(value = "select * from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
-    TicketBuyer findBuyer(Integer id);
+    TicketBuyer findBuyerById(Integer id);
 
     @Query(value = "select * from TicketBuyer tb", nativeQuery = true)
     List<TicketBuyer> findBuyers();
+
+    @Query(value = "select tb.firstname from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
+    String findFirstName(Integer id);
+
+    @Query(value = "select tb.lastname from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
+    String findLastName(Integer id);
+
+    @Query(value = "select tb.address from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
+    String findAddress(Integer id);
+
+    @Query(value = "select tb.email from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
+    String findEmail(Integer id);
+
+    @Query(value = "select tb.phone from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
+    String findPhone(Integer id);
+
+    @Query(value = "select tb.password from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
+    String findPassword(Integer id);
 
     @Transactional
     @Modifying
@@ -27,7 +45,7 @@ public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integ
 
     @Transactional
     @Modifying
-    @Query(value = "update TicketBuyer tb set tb.firstname = ?1, tb.lastname = ?2, tb. address = ?3, tb.email = ?4, tb.phone = ?5, tb.password = ?6 where tb.id = ?7")
-    void update(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("address") String address, @Param("email") String email, @Param("phone") String phone, @Param("password") String password);
+    @Query(value = "update TicketBuyer tb set tb.firstname = ?1, tb.lastname = ?2, tb. address = ?3, tb.email = ?4, tb.phone = ?5, tb.password = ?6 where tb.id = ?7", nativeQuery = true)
+    void update(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("address") String address, @Param("email") String email, @Param("phone") String phone, @Param("password") String password, @Param("id") Integer id);
 
 }
