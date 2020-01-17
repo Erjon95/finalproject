@@ -1,13 +1,12 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
 import org.mindrot.jbcrypt.BCrypt;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 @org.springframework.stereotype.Service
 public class BuyerService extends Service {
-
-    private TicketBuyerRepository ticketBuyerRepository;
 
     public boolean isThere(String email, String password, List<TicketBuyer> lt) {
         boolean isThere = false;
@@ -33,35 +32,50 @@ public class BuyerService extends Service {
         return isThere;
     }
 
-    public boolean isNull (TicketBuyer ticketBuyer, Integer id) {
-        if (ticketBuyer.getFirstname().equals(null)) {
+    public void firstNameEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+        if (ticketBuyer.getFirstname().equals("")) {
             String firstName = ticketBuyerRepository.findFirstName(id);
             ticketBuyer.setFirstname(firstName);
         }
+    }
 
-        if (ticketBuyer.getLastname().equals(null)) {
+    public void lastNameEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+
+        if (ticketBuyer.getLastname().equals("")) {
             String lastName = ticketBuyerRepository.findLastName(id);
             ticketBuyer.setLastname(lastName);
         }
+    }
 
-        if (ticketBuyer.getAddress().equals(null)) {
+    public void addressEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+
+        if (ticketBuyer.getAddress().equals("")) {
             String address = ticketBuyerRepository.findAddress(id);
             ticketBuyer.setAddress(address);
         }
+    }
 
-        if (ticketBuyer.getEmail().equals(null)) {
+    public void emailEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+
+        if (ticketBuyer.getEmail().equals("")) {
             String email = ticketBuyerRepository.findEmail(id);
-            ticketBuyer.setFirstname(email);
+            ticketBuyer.setEmail(email);
         }
+    }
 
-        if (ticketBuyer.getPhone().equals(null)) {
+    public void phoneEmpty(TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+
+        if (ticketBuyer.getPhone().equals("")) {
             String phone = ticketBuyerRepository.findPhone(id);
             ticketBuyer.setPhone(phone);
         }
+    }
 
-        if (ticketBuyer.getPassword().equals(null)) {
+    public boolean isPasswordEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+
+        if (ticketBuyer.getPassword().equals("")) {
             String password = ticketBuyerRepository.findPassword(id);
-            ticketBuyer.setFirstname(password);
+            ticketBuyer.setPassword(password);
             return true;
         }
         return false;

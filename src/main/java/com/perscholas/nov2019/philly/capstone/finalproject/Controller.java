@@ -1,16 +1,10 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
-import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
-import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 @org.springframework.stereotype.Controller    // This means that this class is a Controller
 @RequestMapping(path="/") // This means URL's start with / (after Application path)
@@ -317,17 +311,23 @@ public class  Controller {
     @PostMapping(path = "/user-account")
     public String updateBuyer(Model model, TicketBuyer ticketBuyer) {
 
-        String password;
+        buyerService.firstNameEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository);
 
-        buyerService.isNull(ticketBuyer, ticketBuyerId);
+        buyerService.lastNameEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository);
 
-        String hashedPwd = BCrypt.
+        buyerService.addressEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository);
+
+        buyerService.emailEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository);
+
+        buyerService.phoneEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository);
+
+        if (!buyerService.isPasswordEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository))
+            ticketBuyer.setPassword(buyerService.hashPassword(ticketBuyer.getPassword()));
 
         ticketBuyerRepository.update(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), ticketBuyer.getPassword(), ticketBuyerId);
         TicketBuyer tb = ticketBuyerRepository.findBuyerById(ticketBuyerId);
 
         model.addAttribute("ticketbuyer", tb);
-
 
         return "user-account";
     }
