@@ -32,47 +32,28 @@ public class BuyerService extends Service {
         return isThere;
     }
 
-    public void firstNameEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
+    public boolean isEmpty(TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository)
+    {
         if (ticketBuyer.getFirstname().equals("")) {
             String firstName = ticketBuyerRepository.findFirstName(id);
             ticketBuyer.setFirstname(firstName);
         }
-    }
-
-    public void lastNameEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
-
         if (ticketBuyer.getLastname().equals("")) {
             String lastName = ticketBuyerRepository.findLastName(id);
             ticketBuyer.setLastname(lastName);
         }
-    }
-
-    public void addressEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
-
         if (ticketBuyer.getAddress().equals("")) {
             String address = ticketBuyerRepository.findAddress(id);
             ticketBuyer.setAddress(address);
         }
-    }
-
-    public void emailEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
-
         if (ticketBuyer.getEmail().equals("")) {
             String email = ticketBuyerRepository.findEmail(id);
             ticketBuyer.setEmail(email);
         }
-    }
-
-    public void phoneEmpty(TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
-
         if (ticketBuyer.getPhone().equals("")) {
             String phone = ticketBuyerRepository.findPhone(id);
             ticketBuyer.setPhone(phone);
         }
-    }
-
-    public boolean isPasswordEmpty (TicketBuyer ticketBuyer, Integer id, TicketBuyerRepository ticketBuyerRepository) {
-
         if (ticketBuyer.getPassword().equals("")) {
             String password = ticketBuyerRepository.findPassword(id);
             ticketBuyer.setPassword(password);
@@ -80,5 +61,4 @@ public class BuyerService extends Service {
         }
         return false;
     }
-
 }

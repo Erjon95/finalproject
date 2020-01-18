@@ -79,10 +79,8 @@
 <body>
 
 <div id="grid-container">
-
-<h3>Buyer Info</h3>
-  
   <div class="grid-item">
+    <h3>Buyer Info</h3>
 	
 	<table>
 		<thead>
@@ -109,6 +107,51 @@
 				
 				<td><form action = "#" th:action="@{/edit-buyer}" method = "get">
 						<button type = "submit" style = "width : 100%"/>Edit</button>
+					</form>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+  </div>
+  
+  <div class="grid-item">
+    <h3>My Tickets</h3>
+	
+	<table>
+		<thead>
+            <tr>
+				<th>Event Title</th>
+				<th>Event Description</th>
+				<th>Place</th>
+				<th>Start Date</th>
+				<th>End Date</th>
+				<th>Time</th>
+				<th>Organizer</th>
+				<th>Timestamp</th>
+			</tr>
+        </thead>
+		<tbody>
+			<tr th:each = "printableticket : ${printabletickets}">
+				
+				<td th:text="${printableticket.eventtitle}"></td>
+				
+				<td th:text="${printableticket.eventdescription}"></td>
+				
+				<td th:text="${printableticket.eventplace}"></td>
+				
+				<td th:text="${printableticket.eventstartdate}"></td>
+				
+				<td th:text="${printableticket.eventenddate}"></td>
+				
+				<td th:text="${printableticket.showtime}"></td>
+				
+				<td th:text="${printableticket.sellername}"></td>
+				
+				<td th:text="${printableticket.timestamp}"></td>
+				
+				<td><form action = "#" th:action="@{/buyer-account}" method = "post">
+						<button type = "submit" style = "width : 100%"/>Printable</button>
+						<button type = "submit" style = "width : 100%"/>Delete</button>
 					</form>
 				</td>
 			</tr>
