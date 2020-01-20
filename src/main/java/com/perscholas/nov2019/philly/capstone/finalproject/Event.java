@@ -1,9 +1,6 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Blob;
 
 @Entity
@@ -13,7 +10,8 @@ public class Event {
     @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
 
-    private Integer ticketsellerid, numberoftickets;
+    private Integer ticketsellerid;
+    private Integer numberoftickets;
     private String titleofevent;
     private String placeofevent;
     private String startdate;
@@ -23,6 +21,18 @@ public class Event {
     private String priceofticket;
     private Blob picture;
     private String timestamp;
+
+    /*@ManyToOne
+    @JoinColumn(name = "ticketsellerid", insertable = false, updatable = false)
+    private TicketSeller ticketseller;
+
+    public TicketSeller getTicketSeller() {
+        return ticketseller;
+    }
+
+    public void setTicketSeller(TicketSeller ticketSeller) {
+        this.ticketseller = ticketSeller;
+    }*/
 
     public Integer getId() {
         return id;
@@ -118,5 +128,17 @@ public class Event {
 
     public void setTimestamp(String timestamp) {
         this.timestamp = timestamp;
+    }
+
+    public String toString( String firstName, String lastName, String organizer) {
+        return firstName + " " + lastName + "\n" +
+                "titleofevent='" + titleofevent + '\'' +
+                ", placeofevent='" + placeofevent + '\'' +
+                ", startdate='" + startdate + '\'' +
+                ", enddate='" + enddate + '\'' +
+                ", description='" + description + '\'' +
+                ", localtimeofshow='" + localtimeofshow + '\'' +
+                ", organizer='" + organizer
+                ;
     }
 }

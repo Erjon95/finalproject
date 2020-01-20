@@ -126,31 +126,26 @@
 				<th>Start Date</th>
 				<th>End Date</th>
 				<th>Time</th>
-				<th>Organizer</th>
-				<th>Timestamp</th>
 			</tr>
         </thead>
 		<tbody>
-			<tr th:each = "printableticket : ${printabletickets}">
+			<tr th:each = "event : ${events}">
 				
-				<td th:text="${printableticket.eventtitle}"></td>
+				<td th:text="${event.titleofevent}"></td>
 				
-				<td th:text="${printableticket.eventdescription}"></td>
+				<td th:text="${event.description}"></td>
 				
-				<td th:text="${printableticket.eventplace}"></td>
+				<td th:text="${event.placeofevent}"></td>
 				
-				<td th:text="${printableticket.eventstartdate}"></td>
+				<td th:text="${event.startdate}"></td>
 				
-				<td th:text="${printableticket.eventenddate}"></td>
+				<td th:text="${event.enddate}"></td>
 				
-				<td th:text="${printableticket.showtime}"></td>
+				<td th:text="${event.localtimeofshow}"></td>
 				
-				<td th:text="${printableticket.sellername}"></td>
-				
-				<td th:text="${printableticket.timestamp}"></td>
-				
-				<td><form action = "#" th:action="@{/buyer-account}" method = "post">
-						<button type = "submit" style = "width : 100%"/>Printable</button>
+				<td><a href  = "C:/Users/er_dj/Pictures/Saved Pictures/headshots/img_5897.jpg" download>Download</a>
+					
+					<form action = "#" th:action="@{/buyer-account}" method = "get">
 						<button type = "submit" style = "width : 100%"/>Delete</button>
 					</form>
 				</td>

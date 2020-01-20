@@ -1,12 +1,15 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
+public interface PrintableTicketRepository extends CrudRepository<PrintableTicket, Integer> {
 
-public interface PrintableTicketRepository extends CrudRepository {
-    @Query("select e.titleofevent, e.description, e.placeofevent, e.startdate, e.enddate, e.localtimeofshow, ts.name, t.timestamp from Ticket t join TicketSeller ts on t.ticketsellerid = ts.id join Event e on t.eventid = e.id where t.ticketbuyerid = ?1")
-    List<PrintableTicket> findPrintableTicketsByBuyerId(@Param("ticketbuyerid") Integer ticketBuyerId);
+    @Transactional
+    @Modifying
+    @Query(value = "insert into printableticket(ticketbuyerid, titleofevent, description, placeofevent, startdate, enddate, localtimeofshow, organizer, timestamp) values (?1, ?2, ?3, ?4, ?5, ?6, ?7, ?8, ?9)", nativeQuery = true)
+    public void insert(@Param("ticketbuyerid") Integer ticketBuyerId, @Param("titleofevent") String titleOfEvent, @Param("description") String description, @Param("placeofevent") String placeOfEvent, @Param("startdate") String startDate, @Param("enddate") String endDate, @Param("localtimeofshow") String localTimeOfShow, @Param("organizer") String organizer, @Param("timestamp") String timeStamp);
 }

@@ -1,70 +1,78 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class PrintableTicket {
 
-    private String sellername;
-    private String eventtitle;
-    private String eventplace;
-    private String eventdescription;
-    private String eventstartdate;
-    private String eventenddate;
-    private String showtime;
+    @Id
+    @GeneratedValue(strategy= GenerationType.AUTO)
+    private String organizer;
+    private String titleofevent;
+    private String placeofevent;
+    private String description;
+    private String startdate;
+    private String enddate;
+    private String localtimeofshow;
     private String timestamp;
 
-    public String getSellername() {
-        return sellername;
+    public String getOrganizer() {
+        return organizer;
     }
 
-    public void setSellername(String sellername) {
-        this.sellername = sellername;
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
     }
 
-    public String getEventtitle() {
-        return eventtitle;
+    public String getTitleofevent() {
+        return titleofevent;
     }
 
-    public void setEventtitle(String eventtitle) {
-        this.eventtitle = eventtitle;
+    public void setTitleofevent(String titleofevent) {
+        this.titleofevent = titleofevent;
     }
 
-    public String getEventplace() {
-        return eventplace;
+    public String getPlaceofevent() {
+        return placeofevent;
     }
 
-    public void setEventplace(String eventplace) {
-        this.eventplace = eventplace;
+    public void setPlaceofevent(String placeofevent) {
+        this.placeofevent = placeofevent;
     }
 
-    public String getEventdescription() {
-        return eventdescription;
+    public String getDescription() {
+        return description;
     }
 
-    public void setEventdescription(String eventdescription) {
-        this.eventdescription = eventdescription;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getEventstartdate() {
-        return eventstartdate;
+    public String getStartdate() {
+        return startdate;
     }
 
-    public void setEventstartdate(String eventstartdate) {
-        this.eventstartdate = eventstartdate;
+    public void setStartdate(String startdate) {
+        this.startdate = startdate;
     }
 
-    public String getEventenddate() {
-        return eventenddate;
+    public String getEnddate() {
+        return enddate;
     }
 
-    public void setEventenddate(String eventenddate) {
-        this.eventenddate = eventenddate;
+    public void setEnddate(String enddate) {
+        this.enddate = enddate;
     }
 
-    public String getShowtime() {
-        return showtime;
+    public String getLocaltimeofshow() {
+        return localtimeofshow;
     }
 
-    public void setShowtime(String showtime) {
-        this.showtime = showtime;
+    public void setLocaltimeofshow(String localtimeofshow) {
+        this.localtimeofshow = localtimeofshow;
     }
 
     public String getTimestamp() {

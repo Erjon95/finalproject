@@ -1,9 +1,6 @@
 package com.perscholas.nov2019.philly.capstone.finalproject;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Ticket {
@@ -16,6 +13,42 @@ public class Ticket {
     private Integer ticketsellerid;
     private Integer eventid;
     private String timestamp;
+
+    /*@OneToOne
+    @JoinColumn(name = "ticketbuyerid", insertable = false, updatable = false)
+    private TicketBuyer ticketBuyer;
+
+    @ManyToOne
+    @JoinColumn(name = "eventid", insertable = false, updatable = false)
+    private Event event;
+
+    @ManyToOne
+    @JoinColumn(name = "ticketsellerid", insertable = false, updatable = false)
+    private TicketSeller ticketSeller;
+
+    public TicketBuyer getTicketBuyer() {
+        return ticketBuyer;
+    }
+
+    public void setTicketBuyer(TicketBuyer ticketBuyer) {
+        this.ticketBuyer = ticketBuyer;
+    }
+
+    public Event getEvent() {
+        return event;
+    }
+
+    public void setEvent(Event event) {
+        this.event = event;
+    }
+
+    public TicketSeller getTicketSeller() {
+        return ticketSeller;
+    }
+
+    public void setTicketSeller(TicketSeller ticketSeller) {
+        this.ticketSeller = ticketSeller;
+    }*/
 
     public Integer getId() {
         return id;

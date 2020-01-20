@@ -10,8 +10,11 @@ import java.util.List;
 
 public interface EventRepository extends CrudRepository<Event, Integer> {
 
-    @Query("select e from Event e where e.titleofevent like %?1% and e.placeofevent like %?2% and e.description like %?3% and e.startdate like %?4% and e.enddate like %?5% and e.localtimeofshow like %?6%")
+    @Query(value = "select * from Event e where e.titleofevent like %?1% and e.placeofevent like %?2% and e.description like %?3% and e.startdate like %?4% and e.enddate like %?5% and e.localtimeofshow like %?6%", nativeQuery = true)
     List<Event> findEvents(String titleOfEvent, String placeOfEvent, String description, String startDate, String endDate, String localTimeOfShow);
+
+    @Query(value = "select * from Event e where e.id = ?1", nativeQuery = true)
+    Event findEventById(@Param("id") Integer id);
 
     @Query("select e.ticketsellerid from Event e where e.id = ?1")
     Integer findSellerId(Integer eventId);
