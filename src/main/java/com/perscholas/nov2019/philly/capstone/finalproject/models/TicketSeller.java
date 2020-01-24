@@ -1,4 +1,4 @@
-package com.perscholas.nov2019.philly.capstone.finalproject;
+package com.perscholas.nov2019.philly.capstone.finalproject.models;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

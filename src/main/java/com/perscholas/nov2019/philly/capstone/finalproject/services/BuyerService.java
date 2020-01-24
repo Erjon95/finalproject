@@ -1,7 +1,8 @@
-package com.perscholas.nov2019.philly.capstone.finalproject;
+package com.perscholas.nov2019.philly.capstone.finalproject.services;
 
+import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketBuyer;
+import com.perscholas.nov2019.philly.capstone.finalproject.repositories.TicketBuyerRepository;
 import org.mindrot.jbcrypt.BCrypt;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 

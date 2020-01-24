@@ -1,5 +1,6 @@
-package com.perscholas.nov2019.philly.capstone.finalproject;
+package com.perscholas.nov2019.philly.capstone.finalproject.services;
 
+import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketSeller;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.util.List;

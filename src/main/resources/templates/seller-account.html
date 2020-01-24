@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
-    <title>Edit Buyer Info</title>
+    <title>Edit Seller Info</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -80,32 +80,37 @@
 
 <div id="grid-container">
   <div class="grid-item">
-    <h3>Buyer Info</h3>
+    <h3>Seller Info</h3>
 	
 	<table>
 		<thead>
             <tr>
+				<th>Organization</th>
+				<th>Address</th>
+				<th>Website</th>
 				<th>First Name</th>
 				<th>Last Name</th>
-				<th>Address</th>
 				<th>Email</th>
-				<th>Phone</th>
-				<th>Edit</th>
+                <th>Phone</th>
 			</tr>
         </thead>
 		<tbody>
 			<tr>
-				<td th:text="${ticketbuyer.firstname}"></td>
+				<td th:text="${ticketseller.orgname}"></td>
 				
-				<td th:text="${ticketbuyer.lastname}"></td>
+				<td th:text="${ticketseller.orgaddress}"></td>
 				
-				<td th:text="${ticketbuyer.address}"></td>
+				<td th:text="${ticketseller.webaddress}"></td>
+                
+                <td th:text="${ticketseller.contactfirstname}"></td>
+
+                <td th:text="${ticketseller.contactlastname}"></td>
 				
-				<td th:text="${ticketbuyer.email}"></td>
+				<td th:text="${ticketseller.contactemail}"></td>
 				
-				<td th:text="${ticketbuyer.phone}"></td>
+				<td th:text="${ticketseller.contactphone}"></td>
 				
-				<td><form action = "#" th:action="@{/edit-buyer}" method = "get">
+				<td><form action = "#" th:action="@{/edit-seller}" method = "get">
 						<button type = "submit" style = "width : 100%"/>Edit</button>
 					</form>
 				</td>
@@ -115,7 +120,7 @@
   </div>
   
   <div class="grid-item">
-    <h3>My Tickets</h3>
+    <h3>My Events</h3>
 	
 	<table>
 		<thead>
@@ -126,6 +131,8 @@
 				<th>Start Date</th>
 				<th>End Date</th>
 				<th>Time</th>
+                <th>Price</th>
+                <th>Date Uploaded</th>
 			</tr>
         </thead>
 		<tbody>
@@ -143,9 +150,11 @@
 				
 				<td th:text="${event.localtimeofshow}"></td>
 				
-				<td><a href  = "C:/Users/er_dj/Pictures/Saved Pictures/headshots/img_5897.jpg" download>Download</a>
+				<td th:text="${event.priceofticket}"></td>
+                
+                <td th:text="${event.timestamp}"></td>
 					
-					<form action = "#" th:action="@{/buyer-account}" method = "get">
+					<form action = "#" th:action="@{/seller-account}" method = "get">
 						<button type = "submit" style = "width : 100%"/>Delete</button>
 					</form>
 				</td>
@@ -156,8 +165,9 @@
   <div class = "dropdown" style = "position: relative; margin-left: 200px">
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
-		<a href="/">Search</a>
-		<a href="userlogout">Log Out</a>
+        <a href="userlogout">Upload an Event</a>
+        <a href="userlogout">Log Out</a>
+        
 	</div>
   </div>
 </div>

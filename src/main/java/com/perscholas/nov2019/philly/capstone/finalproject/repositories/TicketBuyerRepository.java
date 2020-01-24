@@ -1,6 +1,6 @@
-package com.perscholas.nov2019.philly.capstone.finalproject;
+package com.perscholas.nov2019.philly.capstone.finalproject.repositories;
 
-import org.mindrot.jbcrypt.BCrypt;
+import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketBuyer;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;

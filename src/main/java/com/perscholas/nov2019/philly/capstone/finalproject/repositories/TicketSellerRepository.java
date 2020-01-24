@@ -1,5 +1,6 @@
-package com.perscholas.nov2019.philly.capstone.finalproject;
+package com.perscholas.nov2019.philly.capstone.finalproject.repositories;
 
+import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketSeller;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -12,6 +13,9 @@ public interface TicketSellerRepository extends CrudRepository<TicketSeller, Int
 
     @Query(value = "select * from TicketSeller ts", nativeQuery = true)
     List<TicketSeller> findSellers();
+
+    @Query(value = "select * from TicketSeller ts where ts.orgname = ?1", nativeQuery = true)
+    TicketSeller findSellerByOrgName(@Param("orgname") String orgName);
 
     @Transactional
     @Modifying

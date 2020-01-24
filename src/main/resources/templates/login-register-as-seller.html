@@ -1,8 +1,15 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html lang="en">
 <head>
-	
-    <title>Register</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script type="text/javascript"> 
+		$(document).ready(function(){
+			$("button").click(function(){
+				$("#grid-container").load("login-register.html"); 
+			});
+		});
+	</script> 
+    <title>Log in - Register</title>
 
     <!-- Required meta tags -->
     <meta charset="utf-8">
@@ -16,9 +23,9 @@
 			background-size: cover;
 		}
 		
-		#grid-container {
+		.grid-container {
 			display: grid;
-			grid-template-columns: auto auto;
+			grid-template-columns: auto auto auto;
 			padding: 10px;
 		}
 		
@@ -66,41 +73,67 @@
 		.dropdown:hover .dropbtn {background-color: #3e8e41;}
 			
 	</style>
-	
 </head>
 <body>
 
-<div id="grid-container">
-  
+<div class="grid-container">
   <div class="grid-item">
+	<button type="button">Log In as a Buyer</button>
+	<h3 style = "text-align: left">Log in as a Seller</h3>
+	<form method = "post">
+		<table>
+			<tr>
+				<td align = "left">Organization Name:</td>
+				<td><input type="text" name="orgName" required></td>
+			</tr>
+			
+			<tr>
+				<td align = "left">Password:</td>
+				<td><input type="password" name="password" required></td>
+			</tr>
+			<tr>
+				<td><input type="submit" value="Submit"></td>
+			</tr>
+		</table>
+	</form> 
+  </div>
+  <div class="grid-item">
+	<button type="button">Register as a Buyer</button>
+	<h3 style = "text-align: left">Register as a Seller</h3>
 	
-	<h3 style = "text-align: left">The email provided exists in the database. Please provide a different email.</h3>
-	
-	<form action = "#" th:action="@{/register-buyer}" th:object="${ticketbuyer}" method = "post">
+	<form method = "post">
 		<table>
 			<tr>
 				<td align = "left">First Name:</td>
-				<td><input type="text" th:field="*{firstname}" required></td>
+				<td><input type="text" name="fname" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Last Name:</td>
-				<td><input type="text" th:field="*{lastname}" required></td>
+				<td><input type="text" name="lname" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Organization Name:</td>
+				<td><input type="text" name="orgName" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Email:</td>
-				<td><input type="email" th:field="*{email}" required></td>
+				<td><input type="email" name="email" required></td>
 			</tr>
 			<tr>
 				<td align = "left">Phone:</td>
-				<td><input type="tel" th:field="*{phone}"></td>
+				<td><input type="tel" name="phone"></td>
 			</tr>
 			<tr>
 				<td align = "left">Address:</td>
-				<td><input type="text" th:field="*{address}" required></td>
+				<td><input type="text" name="address"></td>
 			</tr>
 			<tr>
 				<td align = "left">Password:</td>
 				<td><input type="password" name="password" required></td>
+			</tr>
+			<tr>
+				<td align = "left">Confirm Password:</td>
+				<td><input type="password" name="confirmPassword" required></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Save"></td>
@@ -111,14 +144,9 @@
   <div class = "dropdown" style = "position: relative; margin-left: 200px">
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
-		<a href="/">Search</a>
-		<a href="login-buyer">Log In as a Buyer</a>
-		<a href="login-seller">Log In as a Seller</a>
-		<a href="register-seller">Register as a Seller</a>
+		<a href="events.html">Home</a>
 	</div>
   </div>
 </div>
-
-
 </body>
 </html>

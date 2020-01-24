@@ -1,8 +1,7 @@
-package com.perscholas.nov2019.philly.capstone.finalproject;
+package com.perscholas.nov2019.philly.capstone.finalproject.services;
 
-import org.mindrot.jbcrypt.BCrypt;
+import com.perscholas.nov2019.philly.capstone.finalproject.models.Event;
 
-import java.util.Collection;
 import java.util.List;
 
 
