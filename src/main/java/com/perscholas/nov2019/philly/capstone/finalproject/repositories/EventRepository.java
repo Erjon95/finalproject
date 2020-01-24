@@ -17,6 +17,9 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
     @Query(value = "select * from Event e where e.id = ?1", nativeQuery = true)
     Event findEventById(@Param("id") Integer id);
 
+    @Query(value = "select * from Event e where e.ticketsellerid = ?1", nativeQuery = true)
+    List<Event> findEventsBySellerId(@Param("ticketsellerid") Integer ticketSellerId);
+
     @Query("select e.ticketsellerid from Event e where e.id = ?1")
     Integer findSellerId(Integer eventId);
 
@@ -24,7 +27,4 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
     @Modifying
     @Query(value = "insert into event(ticketsellerid, titleofevent, placeofevent, description, startdate, enddate, localtimeofshow, priceofticket, numberoftickets) values(:ticketsellerid, :titleofevent, :placeofevent, :description, :startdate, :enddate, :localtimeofshow, :priceofticket, :numberoftickets)", nativeQuery = true)
     void insertEvent(@Param("ticketsellerid") Integer ticketsellerid, @Param("titleofevent") String titleofevent, @Param("placeofevent") String placeofevent, @Param("description") String description, @Param("startdate") String startdate, @Param("enddate") String enddate, @Param("localtimeofshow") String localtimeofshow, @Param("priceofticket") String priceofticket, @Param("numberoftickets") Integer numberoftickets);
-
-    @Query("select e from Event e where e.ticketsellerid = ?1")
-    List<Event> findEventsBySellerId(@Param("ticketsellerid") Integer ticketSellerId);
 }

@@ -160,10 +160,10 @@ public class TicketBuyerController {
     // A buyer logs out.
 
     /***********************************/
-    @GetMapping(path = "/userlogout")
+    @GetMapping(path = "/buyerlogout")
     public String logOutBuyer() {
         ticketBuyerId = -1;
-        return "userlogout";
+        return "buyerlogout";
     }
     /*********************************/
 
