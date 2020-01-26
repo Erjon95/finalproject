@@ -63,7 +63,6 @@ public class SellerService extends Service {
             String phone = ticketSellerRepository.findPhoneById(id);
             ticketSeller.setContactphone(phone);
         }
-
         if (ticketSeller.getPassword().equals("")) {
             String password = ticketSellerRepository.findPasswordById(id);
             ticketSeller.setPassword(password);

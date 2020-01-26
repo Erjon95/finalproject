@@ -76,12 +76,8 @@
   
   <div class="grid-item">
 	
-	<form action = "#" th:action="@{/upload_event}" th:object="${event}"method = "post">
+	<form action = "#" th:action="@{/seller-account}" th:object="${event}"method = "post">
 		<table>
-			<tr>
-				<td align = "left">Ticket Seller ID:</td>
-				<td><input type="text" th:field="*{ticketsellerid}" required></td>
-			</tr>
 			<tr>
 				<td align = "left">Title Of Event:</td>
 				<td><input type="text" th:field="*{titleofevent}" required></td>
@@ -125,7 +121,7 @@
 		<div class="dropdown-content">
 			<a href="seller-account">Account</a>
 			<a href="edit-seller">Edit Info</a>
-			<a href="userlogout">Log Out</a>
+			<a href="sellerlogout">Log Out</a>
 
 		</div>
 	</div>

@@ -153,7 +153,8 @@
 				<td th:text="${event.priceofticket}"></td>
                 
                 <td th:text="${event.timestamp}"></td>
-					
+
+				<td>
 					<form action = "#" th:action="@{/seller-account}" method = "get">
 						<button type = "submit" style = "width : 100%"/>Delete</button>
 					</form>
@@ -166,7 +167,7 @@
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
         <a href="upload_event">Upload an Event</a>
-        <a href="userlogout">Log Out</a>
+        <a href="sellerlogout">Log Out</a>
         
 	</div>
   </div>
