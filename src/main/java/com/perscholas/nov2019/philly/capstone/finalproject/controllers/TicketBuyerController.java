@@ -21,10 +21,12 @@ import java.util.List;
 public class TicketBuyerController {
 
     static Integer ticketBuyerId;
+    private boolean editBuyer;
 
     public TicketBuyerController()
     {
         ticketBuyerId = -1;
+        editBuyer = false;
     }
 
     @Autowired // This means to get the bean called ticketBuyerRepository
@@ -193,21 +195,45 @@ public class TicketBuyerController {
     /**********************************************************************************************************************************************************************************************************/
     @GetMapping(path = "/edit-buyer")
     public String editBuyer(Model model) {
-
+        editBuyer = true;
         model.addAttribute("ticketbuyer", new TicketBuyer());
         return "edit-buyer";
     }
 
     @PostMapping(path = "/buyer-account")
-    public String updateBuyer(Model model, TicketBuyer ticketBuyer) {
+    public String accountBuyer(Model model, TicketBuyer ticketBuyer, @RequestParam(value = "deleteTicket", required = false) Integer eventId) {
 
-        if (!buyerService.isEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository))
-            ticketBuyer.setPassword(buyerService.hashPassword(ticketBuyer.getPassword()));
+        if (editBuyer) {
 
-        ticketBuyerRepository.update(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), ticketBuyer.getPassword(), ticketBuyerId);
-        TicketBuyer tb = ticketBuyerRepository.findBuyerById(ticketBuyerId);
+            if (!buyerService.isEmpty(ticketBuyer, ticketBuyerId, ticketBuyerRepository))
+                ticketBuyer.setPassword(buyerService.hashPassword(ticketBuyer.getPassword()));
 
-        model.addAttribute("ticketbuyer", tb);
+            ticketBuyerRepository.update(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), ticketBuyer.getPassword(), ticketBuyerId);
+            TicketBuyer tb = ticketBuyerRepository.findBuyerById(ticketBuyerId);
+
+            List<Integer> eventid = ticketRepository.findEventsByBuyerId(ticketBuyerId);
+            List<Event> events = new ArrayList<>();
+
+            for (Integer eid : eventid)
+                events.add(eventRepository.findEventById(eid));
+
+            model.addAttribute("ticketbuyer", tb);
+            model.addAttribute("events", events);
+            editBuyer = false;
+
+            return "buyer-account";
+        }
+
+        ticketRepository.deleteTicketByEventId(eventId);
+        TicketBuyer ticketBuyer1 = ticketBuyerRepository.findBuyerById(ticketBuyerId);
+        List<Integer> eventid = ticketRepository.findEventsByBuyerId(ticketBuyerId);
+        List<Event> events = new ArrayList<>();
+
+        for (Integer eid : eventid)
+            events.add(eventRepository.findEventById(eid));
+
+        model.addAttribute("ticketbuyer", ticketBuyer1);
+        model.addAttribute("events", events);
 
         return "buyer-account";
     }

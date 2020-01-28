@@ -108,38 +108,6 @@ public class TicketSellerController {
         model.addAttribute("ticketseller", new TicketSeller());
         return "login-seller";
     }
-
-    /*@PostMapping(path = "/login-seller")
-    public String loginSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event, Model model) {
-        List<TicketSeller> lt = ticketSellerRepository.findSellers();
-
-        if (sellerService.isThere(ticketSeller.getOrgname(), ticketSeller.getPassword(), lt)) {
-            TicketSeller ticketSeller1 = ticketSellerRepository.findSellerByOrgName(ticketSeller.getOrgname());
-            ticketSellerId = ticketSeller1.getId();
-            model.addAttribute("ticketseller", ticketSeller1);
-            return "seller-account";
-        }
-
-        return "error/login-seller";
-    }*/
-
-    @GetMapping(path = "/error/login-seller")
-    public String setUpLoginAgainSeller(Model model) {
-        model.addAttribute("ticketseller", new TicketSeller());
-        return "error/login-seller";
-    }
-
-    @PostMapping(path = "/error_login-seller")
-    public String loginAgainSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event) {
-        List<TicketSeller> lt = ticketSellerRepository.findSellers();
-
-        if (sellerService.isThere(ticketSeller.getOrgname(), ticketSeller.getPassword(), lt)) {
-            login = true;
-            return "seller-account";
-        }
-
-        return "error/login-seller";
-    }
     /******************************************************************************************************************************************/
 
     //A ticket seller uploads an event.
@@ -155,22 +123,6 @@ public class TicketSellerController {
         }
         return "sellerlogout";
     }
-
-    /*@PostMapping(path = "/upload_event")
-    public String handleUpload(@ModelAttribute("event") Event event, Model model) {
-
-        if (ticketSellerId != -1) {
-            try {
-                eventRepository.insertEvent(ticketSellerId, event.getTitleofevent(), event.getPlaceofevent(), event.getDescription(), event.getStartdate(), event.getEnddate(), event.getLocaltimeofshow(), event.getPriceofticket(), event.getNumberoftickets());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-            TicketSeller ticketSeller = ticketSellerRepository.findSellerById(ticketSellerId);
-            model.addAttribute("ticketseller", ticketSeller);
-            return "seller-account";
-        }
-        return "sellerlogout";
-    }*/
     /*********************************************************************************************************************************************************************************************************************************************************************/
 
     //Sellers edit their accounts
@@ -202,22 +154,8 @@ public class TicketSellerController {
         return "sellerlogout";
     }
 
-   /* @PostMapping(path = "/seller-account")
-    public String updateSeller(Model model, TicketSeller ticketSeller) {
-
-        if (!sellerService.isEmpty(ticketSeller, ticketSellerId, ticketSellerRepository))
-            ticketSeller.setPassword(sellerService.hashPassword(ticketSeller.getPassword()));
-
-        ticketSellerRepository.update(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), ticketSeller.getPassword(), ticketSellerId);
-        TicketSeller ts = ticketSellerRepository.findSellerById(ticketSellerId);
-
-        model.addAttribute("ticketseller", ts);
-
-        return "seller-account";
-    }*/
-
    @PostMapping(path = "/seller-account")
-   public String sellerAccount (Model model, @ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event) {
+   public String sellerAccount (Model model, @ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event, @RequestParam(value = "delete", required = false) Integer eventId) {
 
        if (editSeller) {
            if (!sellerService.isEmpty(ticketSeller, ticketSellerId, ticketSellerRepository))
@@ -254,20 +192,23 @@ public class TicketSellerController {
                TicketSeller ticketSeller1 = ticketSellerRepository.findSellerByOrgName(ticketSeller.getOrgname());
                ticketSellerId = ticketSeller1.getId();
 
-               if (ticketSellerId != -1) {
-                   List<Event> events = eventRepository.findEventsBySellerId(ticketSellerId);
-                   model.addAttribute("events", events);
-                   model.addAttribute("ticketseller", ticketSeller1);
+               List<Event> events = eventRepository.findEventsBySellerId(ticketSellerId);
+               model.addAttribute("events", events);
+               model.addAttribute("ticketseller", ticketSeller1);
+               login = false;
 
-                   return "seller-account";
-               }
-               return "sellerlogout";
+               return "seller-account";
            }
-           login = false;
+           return "error/login-seller";
        }
 
+       eventRepository.deleteEventByEventId(eventId);
+       TicketSeller ticketSeller1 = ticketSellerRepository.findSellerById(ticketSellerId);
+       List<Event> events = eventRepository.findEventsBySellerId(ticketSellerId);
+       model.addAttribute("events", events);
+       model.addAttribute("ticketseller", ticketSeller1);
 
-       return "error/login-seller";
+       return "seller-account";
    }
     /*****************************************************************************************************************************************************************************************************************************************************************************************************************/
 
@@ -277,6 +218,7 @@ public class TicketSellerController {
     @GetMapping(path = "/sellerlogout")
     public String logOutSeller() {
         ticketSellerId = -1;
+        login = false;
         return "sellerlogout";
     }
     /*********************************/

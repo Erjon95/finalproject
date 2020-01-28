@@ -155,8 +155,8 @@
                 <td th:text="${event.timestamp}"></td>
 
 				<td>
-					<form action = "#" th:action="@{/seller-account}" method = "get">
-						<button type = "submit" style = "width : 100%"/>Delete</button>
+					<form action = "#" th:action="@{/seller-account}" method = "post">
+						<button type = "submit" style = "width : 100%" th:name = "delete" th:value = "${event.id}"/>Delete</button>
 					</form>
 				</td>
 			</tr>

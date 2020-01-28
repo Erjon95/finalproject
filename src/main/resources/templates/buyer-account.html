@@ -142,11 +142,10 @@
 				<td th:text="${event.enddate}"></td>
 				
 				<td th:text="${event.localtimeofshow}"></td>
-				
-				<td><a href  = "C:/Users/er_dj/Pictures/Saved Pictures/headshots/img_5897.jpg" download>Download</a>
-					
-					<form action = "#" th:action="@{/buyer-account}" method = "get">
-						<button type = "submit" style = "width : 100%"/>Delete</button>
+
+				<td>
+					<form action = "#" th:action="@{/buyer-account}" method = "post">
+						<button type = "submit" style = "width : 100%" th:name = "deleteTicket" th:value = "${event.id}"/>Delete</button>
 					</form>
 				</td>
 			</tr>
@@ -157,7 +156,7 @@
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
 		<a href="/">Search</a>
-		<a href="userlogout">Log Out</a>
+		<a href="buyerlogout">Log Out</a>
 	</div>
   </div>
 </div>
