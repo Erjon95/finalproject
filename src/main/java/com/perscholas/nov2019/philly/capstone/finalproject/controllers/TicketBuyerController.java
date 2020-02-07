@@ -187,13 +187,28 @@ public class TicketBuyerController {
             TicketBuyer tb = ticketBuyerRepository.findBuyerById(ticketBuyerId);
 
             List<Integer> eventid = ticketRepository.findEventsByBuyerId(ticketBuyerId);
-            List<Event> events = new ArrayList<>();
+            List<PrintableTicket> printableTickets = new ArrayList<>();
 
             for(Integer eid : eventid)
-                events.add(eventRepository.findEventById(eid));
+            {
+                PrintableTicket printableTicket = new PrintableTicket();
+                Event event = eventRepository.findEventById(eid);
+                printableTicket.setId(event.getId());
+                printableTicket.setDescription(event.getDescription());
+                printableTicket.setEnddate(event.getEnddate());
+                printableTicket.setLocaltimeofshow(event.getLocaltimeofshow());
+                printableTicket.setNumberoftickets(event.getNumberoftickets());
+                printableTicket.setPlaceofevent(event.getPlaceofevent());
+                printableTicket.setPriceofticket(event.getPriceofticket());
+                printableTicket.setStartdate(event.getStartdate());
+                printableTicket.setTitleofevent(event.getTitleofevent());
+                printableTicket.setOrganizer(ticketSellerRepository.findOrgNameById(event.getTicketsellerid()));
+
+                printableTickets.add(printableTicket);
+            }
 
             model.addAttribute("ticketbuyer", tb);
-            model.addAttribute("events", events);
+            model.addAttribute("printabletickets", printableTickets);
             editBuyer = false;
 
             return "buyer-account";
@@ -202,14 +217,27 @@ public class TicketBuyerController {
         ticketRepository.deleteTicketByEventId(eventId);
         TicketBuyer ticketBuyer1 = ticketBuyerRepository.findBuyerById(ticketBuyerId);
         List<Integer> eventid = ticketRepository.findEventsByBuyerId(ticketBuyerId);
-        List<Event> events = new ArrayList<>();
+        List<PrintableTicket> printableTickets = new ArrayList<>();
+
         for (Integer eid : eventid) {
-            Event eventById = eventRepository.findEventById(eid);
-            events.add(eventById);
+            PrintableTicket printableTicket = new PrintableTicket();
+            Event event = eventRepository.findEventById(eid);
+            printableTicket.setId(event.getId());
+            printableTicket.setDescription(event.getDescription());
+            printableTicket.setEnddate(event.getEnddate());
+            printableTicket.setLocaltimeofshow(event.getLocaltimeofshow());
+            printableTicket.setNumberoftickets(event.getNumberoftickets());
+            printableTicket.setPlaceofevent(event.getPlaceofevent());
+            printableTicket.setPriceofticket(event.getPriceofticket());
+            printableTicket.setStartdate(event.getStartdate());
+            printableTicket.setTitleofevent(event.getTitleofevent());
+            printableTicket.setOrganizer(ticketSellerRepository.findOrgNameById(event.getTicketsellerid()));
+
+            printableTickets.add(printableTicket);
         }
 
         model.addAttribute("ticketbuyer", ticketBuyer1);
-        model.addAttribute("events", events);
+        model.addAttribute("printabletickets", printableTickets);
 
         return "buyer-account";
     }
