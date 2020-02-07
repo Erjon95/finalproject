@@ -126,26 +126,30 @@
 				<th>Start Date</th>
 				<th>End Date</th>
 				<th>Time</th>
+				<th>Organizer</th>
+				<th>Delete</th>
 			</tr>
         </thead>
 		<tbody>
-			<tr th:each = "event : ${events}">
+			<tr th:each = "printableticket : ${printabletickets}">
 				
-				<td th:text="${event.titleofevent}"></td>
+				<td th:text="${printableticket.titleofevent}"></td>
 				
-				<td th:text="${event.description}"></td>
+				<td th:text="${printableticket.description}"></td>
 				
-				<td th:text="${event.placeofevent}"></td>
+				<td th:text="${printableticket.placeofevent}"></td>
 				
-				<td th:text="${event.startdate}"></td>
+				<td th:text="${printableticket.startdate}"></td>
 				
-				<td th:text="${event.enddate}"></td>
-				
-				<td th:text="${event.localtimeofshow}"></td>
+				<td th:text="${printableticket.enddate}"></td>
+
+				<td th:text="${printableticket.localtimeofshow}"></td>
+
+				<td th:text="${printableticket.organizer}"></td>
 
 				<td>
 					<form action = "#" th:action="@{/buyer-account}" method = "post">
-						<button type = "submit" style = "width : 100%" th:name = "deleteTicket" th:value = "${event.id}"/>Delete</button>
+						<button type = "submit" style = "width : 100%" th:name = "deleteTicket" th:value = "${printableticket.id}"/>Delete</button>
 					</form>
 				</td>
 			</tr>
@@ -156,7 +160,9 @@
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
 		<a href="/">Search</a>
-		<a href="buyerlogout">Log Out</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Log Out"/>
+		</form>
 	</div>
   </div>
 </div>

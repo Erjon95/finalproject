@@ -72,18 +72,24 @@
 <div class="grid-container">
 
    <div class="grid-item">
+	   <div th:if="${param.error}">
+		   Invalid name or password
+	   </div>
+	   <div th:if="${param.logout}">
+		   You have been logged out
+	   </div>
   
 	<h3 style = "text-align: left">Log in as a Seller</h3>
 	<form action = "#" th:action="@{/seller-account}" th:object="${ticketseller}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">Organization Name:</td>
-				<td><input type="text" th:field="*{orgname}" required></td>
+				<td><input type="text" th:field="*{orgname}" id="orgname" name="orgname" required></td>
 			</tr>
 			
 			<tr>
 				<td align = "left">Password:</td>
-				<td><input type="password" th:field="*{password}" required></td>
+				<td><input type="password" th:field="*{password}" id="password" name="password" required></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Submit"></td>

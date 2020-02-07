@@ -1,9 +1,7 @@
 package com.perscholas.nov2019.philly.capstone.finalproject.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class TicketBuyer {
@@ -18,6 +16,15 @@ public class TicketBuyer {
     private String email;
     private String phone;
     private String password;
+    private String role;
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
 
     public String getPassword() {
         return password;
@@ -74,6 +81,4 @@ public class TicketBuyer {
     public void setPhone(String phone) {
         this.phone = phone;
     }
-
-
 }

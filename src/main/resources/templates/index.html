@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	  lang="en">
 <head>
     <title>Search</title>
 
@@ -73,6 +75,13 @@
 <div id="grid-container">
 
   <div class="grid-item">
+	  <div th:if="${isTicketNew}">
+		  Your order was processed successfully.
+	  </div>
+	  <div th:if="${isTicketBought}">
+		  The ticket already exists in your account.
+	  </div>
+
 	<h3>Search For Events</h3>
 	
 	<form action = "#" th:action="@{/search_result}" th:object="${event}"method = "post">
@@ -114,6 +123,11 @@
 		<a href="register-buyer">Register as a Buyer</a>
 		<a href="login-seller">Log In as a Seller</a>
 		<a href="register-seller">Register as a Seller</a>
+		<a href="buyer-account">Account</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Log Out"/>
+		</form>
+
 	</div>
   </div>
 </div>

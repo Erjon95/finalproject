@@ -219,7 +219,7 @@ public class TicketSellerController {
     public String logOutSeller() {
         ticketSellerId = -1;
         login = false;
-        return "sellerlogout";
+        return "userlogout";
     }
     /*********************************/
 }

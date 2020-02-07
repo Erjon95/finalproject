@@ -79,23 +79,23 @@
 		<table>
 			<tr>
 				<td align = "left">First Name:</td>
-				<td><input type="text" th:field="*{firstname}"></td>
+				<td><input type="text" name="firstname" th:value = "${firstname}"></td>
 			</tr>
 			<tr>
 				<td align = "left">Last Name:</td>
-				<td><input type="text" th:field="*{lastname}"></td>
+				<td><input type="text" name="lastname" th:value = "${lastname}"></td>
 			</tr>
 			<tr> 
 				<td align = "left">Address:</td>
-				<td><input type="text" th:field="*{address}"></td>
+				<td><input type="text" name="address" th:value = "${address}"></td>
 			</tr>
 			<tr>
 				<td align = "left">Email:</td>
-				<td><input type="text" th:field="*{email}"></td>
+				<td><input type="email" name="email" th:value = "${email}"></td>
 			</tr>
 			<tr>
 				<td align = "left">Phone:</td>
-				<td><input type="text" th:field="*{phone}"></td>
+				<td><input type="text" name="phone" th:value = "${phone}"></td>
 			</tr>
 			<tr>
 				<td align = "left">Password:</td>
@@ -112,7 +112,9 @@
 	<div class="dropdown-content">
 		<a href="buyer-account">My Account</a>
 		<a href="/">Search</a>
-		<a href="userlogout">Log Out</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Log Out"/>
+		</form>
 	</div>
   </div>
 </div>

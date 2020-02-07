@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	  lang="en">
 <head>
     <title>Log in</title>
 
@@ -72,18 +74,24 @@
 
 <div id="grid-container">
   <div class="grid-item">
+	  <div th:if="${param.error}">
+		  Invalid username or password
+	  </div>
+	  <div th:if="${param.logout}">
+		  You have been logged out
+	  </div>
 
 	<h3 style = "text-align: left">Log in as a Buyer</h3>
-	<form action = "#" th:action="@{/login-buyer}" th:object="${ticketbuyer}" method = "post">
+	<form action = "#" th:action="@{/login-buyer}" th:object="${ticketbuyer}"method = "post">
 		<table>
 			<tr>
 				<td align = "left">Email:</td>
-				<td><input type="email" th:field="*{email}" required></td>
+				<td><input type="email" th:field="*{email}" id = "email" name="email" required></td>
 			</tr>
 			
 			<tr>
 				<td align = "left">Password:</td>
-				<td><input type="password" th:field="*{password}" required></td>
+				<td><input type="password" th:field="*{password}" id="password" name="password" required></td>
 			</tr>
 			<tr>
 				<td><input type="submit" value="Submit"></td>

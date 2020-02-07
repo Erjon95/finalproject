@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	  lang="en">
 <head>
 	
     <title>Register</title>
@@ -73,6 +75,9 @@
 <div id="grid-container">
   
   <div class="grid-item">
+	  <div th:if="${isThere}">
+		   The email provided already exists in the database.<br> Please provide another email
+      </div>
 	
 	<h3 style = "text-align: left">Register as a Buyer</h3>
 	

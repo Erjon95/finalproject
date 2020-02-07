@@ -17,6 +17,9 @@ public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integ
     @Query(value = "select * from TicketBuyer tb where tb.id = ?1", nativeQuery = true)
     TicketBuyer findBuyerById(Integer id);
 
+    @Query(value = "select * from TicketBuyer tb where tb.email = ?1", nativeQuery = true)
+    TicketBuyer findBuyerByEmail(String email);
+
     @Query(value = "select * from TicketBuyer tb", nativeQuery = true)
     List<TicketBuyer> findBuyers();
 
@@ -40,8 +43,8 @@ public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integ
 
     @Transactional
     @Modifying
-    @Query(value = "insert into ticketbuyer(firstname, lastname, address, email, phone, password) values(:firstname, :lastname, :address, :email, :phone, :password)", nativeQuery = true)
-    void registerBuyer(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("address") String address, @Param("email") String email, @Param("phone") String phone, @Param("password") String password);
+    @Query(value = "insert into ticketbuyer(firstname, lastname, address, email, phone, password, role) values(:firstname, :lastname, :address, :email, :phone, :password, :role)", nativeQuery = true)
+    void registerBuyer(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("address") String address, @Param("email") String email, @Param("phone") String phone, @Param("password") String password, @Param("role") String role);
 
     @Transactional
     @Modifying

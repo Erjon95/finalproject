@@ -14,42 +14,6 @@ public class Ticket {
     private Integer eventid;
     private String timestamp;
 
-    /*@OneToOne
-    @JoinColumn(name = "ticketbuyerid", insertable = false, updatable = false)
-    private TicketBuyer ticketBuyer;
-
-    @ManyToOne
-    @JoinColumn(name = "eventid", insertable = false, updatable = false)
-    private Event event;
-
-    @ManyToOne
-    @JoinColumn(name = "ticketsellerid", insertable = false, updatable = false)
-    private TicketSeller ticketSeller;
-
-    public TicketBuyer getTicketBuyer() {
-        return ticketBuyer;
-    }
-
-    public void setTicketBuyer(TicketBuyer ticketBuyer) {
-        this.ticketBuyer = ticketBuyer;
-    }
-
-    public Event getEvent() {
-        return event;
-    }
-
-    public void setEvent(Event event) {
-        this.event = event;
-    }
-
-    public TicketSeller getTicketSeller() {
-        return ticketSeller;
-    }
-
-    public void setTicketSeller(TicketSeller ticketSeller) {
-        this.ticketSeller = ticketSeller;
-    }*/
-
     public Integer getId() {
         return id;
     }

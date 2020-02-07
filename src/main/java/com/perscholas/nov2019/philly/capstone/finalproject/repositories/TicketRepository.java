@@ -1,6 +1,7 @@
 package com.perscholas.nov2019.philly.capstone.finalproject.repositories;
 
 import com.perscholas.nov2019.philly.capstone.finalproject.models.Ticket;
+import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketSeller;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
@@ -21,6 +22,9 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
     @Query(value = "select t.eventid from Ticket t where t.ticketbuyerid = ?1", nativeQuery = true)
     List<Integer> findEventsByBuyerId(@Param("ticketbuyerId") Integer ticketBuyerId);
+
+    @Query(value = "select t.ticketsellerid from Ticket t where t.ticketbuyerid = ?1 and t.eventid = ?2", nativeQuery = true)
+    Integer findSellerByBuyerAndEventId(@Param("ticketbuyerId") Integer ticketBuyerId, @Param("eventid") Integer eventId);
 
     @Transactional
     @Modifying

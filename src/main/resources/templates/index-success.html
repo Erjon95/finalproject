@@ -9,7 +9,7 @@
 	
 	<style>
 		body {
-			background-image: url('images/events-page-header-bg.jpg');
+			background-image: url('images/1.jpg');
 			background-repeat: no-repeat;
 			background-attachment: fixed;
 			background-size: cover;
@@ -112,7 +112,9 @@
 	<input type = "submit" value = "Menu" class = "dropbtn">
 	<div class="dropdown-content">
 		<a href="buyer-account">Account</a>
-		<a href="/">Log Out</a>
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Log Out"/>
+		</form>
 	</div>
   </div>
 </div>

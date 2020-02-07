@@ -1,16 +1,10 @@
 package com.perscholas.nov2019.philly.capstone.finalproject.models;
 
-import javax.persistence.*;
 import java.sql.Blob;
 
-@Entity
-public class Event {
+public class PrintableTicket {
 
-    @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
     private Integer id;
-
-    private Integer ticketsellerid;
     private Integer numberoftickets;
     private String titleofevent;
     private String placeofevent;
@@ -19,8 +13,7 @@ public class Event {
     private String description;
     private String localtimeofshow;
     private String priceofticket;
-    private Blob picture;
-    private String timestamp;
+    private String organizer;
 
     public Integer getId() {
         return id;
@@ -30,12 +23,12 @@ public class Event {
         this.id = id;
     }
 
-    public Integer getTicketsellerid() {
-        return ticketsellerid;
+    public String getOrganizer() {
+        return organizer;
     }
 
-    public void setTicketsellerid(Integer ticketsellerid) {
-        this.ticketsellerid = ticketsellerid;
+    public void setOrganizer(String organizer) {
+        this.organizer = organizer;
     }
 
     public Integer getNumberoftickets() {
@@ -100,33 +93,5 @@ public class Event {
 
     public void setPriceofticket(String priceofticket) {
         this.priceofticket = priceofticket;
-    }
-
-    public Blob getPicture() {
-        return picture;
-    }
-
-    public void setPicture(Blob picture) {
-        this.picture = picture;
-    }
-
-    public String getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(String timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public String toString( String firstName, String lastName, String organizer) {
-        return firstName + " " + lastName + "\n" +
-                "titleofevent='" + titleofevent + '\'' +
-                ", placeofevent='" + placeofevent + '\'' +
-                ", startdate='" + startdate + '\'' +
-                ", enddate='" + enddate + '\'' +
-                ", description='" + description + '\'' +
-                ", localtimeofshow='" + localtimeofshow + '\'' +
-                ", organizer='" + organizer
-                ;
     }
 }
