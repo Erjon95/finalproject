@@ -1,5 +1,6 @@
 package com.perscholas.nov2019.philly.capstone.finalproject.controllers;
 
+import com.perscholas.nov2019.philly.capstone.finalproject.exceptions.UserThereException;
 import com.perscholas.nov2019.philly.capstone.finalproject.models.Event;
 import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketBuyer;
 import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketSeller;
@@ -14,11 +15,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
 
 @org.springframework.stereotype.Controller    // This means that this class is a Controller
-//@RequestMapping(path="/") // This means URL's start with / (after Application path)
 public class TicketSellerController {
 
     private static Integer ticketSellerId = -1;
@@ -57,24 +58,30 @@ public class TicketSellerController {
     }
 
     @PostMapping(path = "/register-seller")
-    public String registerSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller) {
+    public String registerSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller, Model model) {
         List<TicketSeller> lt = ticketSellerRepository.findSellers();
 
-        if (sellerService.isThere(ticketSeller.getOrgname(), lt))
-            return "error/register-seller";
-
-        String hashedPwd = sellerService.hashPassword(ticketSeller.getPassword());
-
         try {
-            ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return "login-seller";
+            if (sellerService.isThere(ticketSeller.getOrgname(), lt))
+                throw new UserThereException(true);
+
+            String hashedPwd = sellerService.hashPassword(ticketSeller.getPassword());
+
+            try {
+                ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd, "SELLER");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return "login-seller";
+        }catch (UserThereException ute){
+            model.addAttribute("isThere", ute.isThere());
+            return "register-seller";
+        }
     }
 
-    @GetMapping(path = "/error/register-seller")
+    /*@GetMapping(path = "/error/register-seller")
     public String setUpRegistrationAgainSeller(Model model) {
         model.addAttribute("ticketseller", new TicketSeller());
         return "error/register-seller";
@@ -90,13 +97,13 @@ public class TicketSellerController {
         String hashedPwd = sellerService.hashPassword(ticketSeller.getPassword());
 
         try {
-            ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd);
+            ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd, "Seller");
         } catch (Exception e) {
             e.printStackTrace();
         }
 
         return "login-seller";
-    }
+    }*/
     /***************************************************************************************************************************************************************************************************************************************************************************************/
 
     //A seller logs in.
@@ -129,35 +136,30 @@ public class TicketSellerController {
 
     /**********************************************************************************************************************************************************************************************************/
     @GetMapping(path = "/seller-account")
-    public String accountSeller(Model model) {
+    public String accountSeller(Model model, HttpServletRequest httpServletRequest) {
 
-        if (ticketSellerId != -1) {
-            TicketSeller ticketSeller = ticketSellerRepository.findSellerById(ticketSellerId);
+        TicketSeller ticketSeller = ticketSellerRepository.findSellerByOrgName(httpServletRequest.getRemoteUser());
 
-            List<Event> events = eventRepository.findEventsBySellerId(ticketSellerId);
+        List<Event> events = eventRepository.findEventsBySellerId(ticketSeller.getId());
 
-            model.addAttribute("ticketseller", ticketSeller);
-            model.addAttribute("events", events);
+        model.addAttribute("ticketseller", ticketSeller);
+        model.addAttribute("events", events);
 
-            return "seller-account";
-        }
-        return "sellerlogout";
+        return "seller-account";
     }
 
     @GetMapping(path = "/edit-seller")
     public String editSeller(Model model) {
-        if (ticketSellerId != -1) {
-            editSeller = true;
-            model.addAttribute("ticketseller", new TicketSeller());
-            return "edit-seller";
-        }
-        return "sellerlogout";
+        editSeller = true;
+        model.addAttribute("ticketseller", new TicketSeller());
+        return "edit-seller";
     }
 
    @PostMapping(path = "/seller-account")
    public String sellerAccount (Model model, @ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event, @RequestParam(value = "delete", required = false) Integer eventId) {
 
        if (editSeller) {
+           ticketSellerId = ticketSeller.getId();
            if (!sellerService.isEmpty(ticketSeller, ticketSellerId, ticketSellerRepository))
                ticketSeller.setPassword(sellerService.hashPassword(ticketSeller.getPassword()));
 
@@ -211,15 +213,4 @@ public class TicketSellerController {
        return "seller-account";
    }
     /*****************************************************************************************************************************************************************************************************************************************************************************************************************/
-
-    // A seller logs out.
-
-    /***********************************/
-    @GetMapping(path = "/sellerlogout")
-    public String logOutSeller() {
-        ticketSellerId = -1;
-        login = false;
-        return "userlogout";
-    }
-    /*********************************/
 }

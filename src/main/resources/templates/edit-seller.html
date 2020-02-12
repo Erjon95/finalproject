@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+      lang="en">
 <head>
     <title>Edit Seller Info</title>
 
@@ -120,7 +122,9 @@
         <div class="dropdown-content">
             <a href="seller-account">My Account</a>
             <a href="upload_event">Upload an Event</a>
-            <a href="logout">Log Out</a>
+            <form th:action="@{/logout}" method="post">
+                <input type="submit" value="Log Out"/>
+            </form>
         </div>
     </div>
 </div>

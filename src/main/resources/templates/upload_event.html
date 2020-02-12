@@ -121,7 +121,9 @@
 		<div class="dropdown-content">
 			<a href="seller-account">Account</a>
 			<a href="edit-seller">Edit Info</a>
-			<a href="sellerlogout">Log Out</a>
+			<form th:action="@{/logout}" method="post">
+				<input type="submit" value="Log Out"/>
+			</form>
 
 		</div>
 	</div>

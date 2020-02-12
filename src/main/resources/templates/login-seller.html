@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity4"
+	  lang="en">
 <head>
 	
     <title>Log In</title>
@@ -76,11 +78,11 @@
 		   Invalid name or password
 	   </div>
 	   <div th:if="${param.logout}">
-		   You have been logged out
+		   You have been logged out.
 	   </div>
   
 	<h3 style = "text-align: left">Log in as a Seller</h3>
-	<form action = "#" th:action="@{/seller-account}" th:object="${ticketseller}" method = "post">
+	<form action = "#" th:action="@{/login-seller}" th:object="${ticketseller}" method = "post">
 		<table>
 			<tr>
 				<td align = "left">Organization Name:</td>

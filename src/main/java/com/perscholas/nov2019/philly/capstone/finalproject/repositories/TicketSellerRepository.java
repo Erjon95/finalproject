@@ -46,8 +46,8 @@ public interface TicketSellerRepository extends CrudRepository<TicketSeller, Int
 
     @Transactional
     @Modifying
-    @Query(value = "insert into ticketseller(orgname, orgaddress, webaddress, contactfirstname, contactlastname, contactemail, contactphone, password) values(:orgname, :orgaddress, :webaddress, :contactfirstname, :contactlastname, :contactemail, :contactphone, :password)", nativeQuery = true)
-    void registerSeller(@Param("orgname") String orgname, @Param("orgaddress") String orgaddress, @Param("webaddress") String webaddress, @Param("contactfirstname") String contactfirstname, @Param("contactlastname") String contactlastname, @Param("contactemail") String contactemail, @Param("contactphone") String contactphone, @Param("password") String password);
+    @Query(value = "insert into ticketseller(orgname, orgaddress, webaddress, contactfirstname, contactlastname, contactemail, contactphone, password, role) values(:orgname, :orgaddress, :webaddress, :contactfirstname, :contactlastname, :contactemail, :contactphone, :password, :role)", nativeQuery = true)
+    void registerSeller(@Param("orgname") String orgname, @Param("orgaddress") String orgaddress, @Param("webaddress") String webaddress, @Param("contactfirstname") String contactfirstname, @Param("contactlastname") String contactlastname, @Param("contactemail") String contactemail, @Param("contactphone") String contactphone, @Param("password") String password, @Param("role") String role);
 
     @Transactional
     @Modifying

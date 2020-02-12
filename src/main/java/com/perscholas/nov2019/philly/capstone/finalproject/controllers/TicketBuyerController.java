@@ -1,5 +1,7 @@
 package com.perscholas.nov2019.philly.capstone.finalproject.controllers;
 
+import com.perscholas.nov2019.philly.capstone.finalproject.exceptions.TicketThereException;
+import com.perscholas.nov2019.philly.capstone.finalproject.exceptions.UserThereException;
 import com.perscholas.nov2019.philly.capstone.finalproject.models.Event;
 import com.perscholas.nov2019.philly.capstone.finalproject.models.PrintableTicket;
 import com.perscholas.nov2019.philly.capstone.finalproject.models.TicketBuyer;
@@ -21,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,25 +65,30 @@ public class TicketBuyerController {
 
     @PostMapping(path = "/register-buyer")
     public String registerBuyer(@ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer, Model model) {
-        boolean isThere = false;
-
-        List<TicketBuyer> lt = ticketBuyerRepository.findBuyers();
-
-        if (buyerService.isThere(ticketBuyer.getEmail(), lt)) {
-            isThere = true;
-            model.addAttribute("isThere", isThere);
-            return "register-buyer";
-        }
-
-        String hashedPwd = buyerService.hashPassword(ticketBuyer.getPassword());
 
         try {
-            ticketBuyerRepository.registerBuyer(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), hashedPwd, "BUYER");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
 
-        return "login-buyer";
+            List<TicketBuyer> lt = ticketBuyerRepository.findBuyers();
+
+            if (buyerService.isThere(ticketBuyer.getEmail(), lt)) {
+                throw new UserThereException(true);
+            }
+
+            String hashedPwd = buyerService.hashPassword(ticketBuyer.getPassword());
+
+            try {
+                ticketBuyerRepository.registerBuyer(ticketBuyer.getFirstname(), ticketBuyer.getLastname(), ticketBuyer.getAddress(), ticketBuyer.getEmail(), ticketBuyer.getPhone(), hashedPwd, "BUYER");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return "login-buyer";
+
+        }catch (UserThereException ute)
+        {
+            model.addAttribute("isThere", ute.isThere());
+            return "register-buyer";
+        }
     }
     /*******************************************************************************************************************************************************************************************/
 
@@ -103,12 +111,17 @@ public class TicketBuyerController {
         Integer ticketSellerId = eventRepository.findSellerId(eventId);
         List<Integer> li = ticketRepository.findTicketIdByEventIdAndBuyerId(eventId, ticketBuyerId);
 
-        if (li.isEmpty()) {
-            ticketRepository.insertTicket(ticketBuyerId, ticketSellerId, eventId);
-            isTicketNew = true;
-        }
-        else
+        try {
+
+            if (li.isEmpty()) {
+                ticketRepository.insertTicket(ticketBuyerId, ticketSellerId, eventId);
+                isTicketNew = true;
+            } else
+                throw new TicketThereException();
+            //isTicketBought = true;
+        }catch (TicketThereException tte){
             isTicketBought = true;
+        }
 
         model.addAttribute("event", new Event());
         model.addAttribute("isTicketNew", isTicketNew);
@@ -146,7 +159,6 @@ public class TicketBuyerController {
             printableTicket.setStartdate(event.getStartdate());
             printableTicket.setTitleofevent(event.getTitleofevent());
             printableTicket.setOrganizer(ticketSellerRepository.findOrgNameById(event.getTicketsellerid()));
-
             printableTickets.add(printableTicket);
         }
 
@@ -189,8 +201,7 @@ public class TicketBuyerController {
             List<Integer> eventid = ticketRepository.findEventsByBuyerId(ticketBuyerId);
             List<PrintableTicket> printableTickets = new ArrayList<>();
 
-            for(Integer eid : eventid)
-            {
+            eventid.forEach(eid -> {
                 PrintableTicket printableTicket = new PrintableTicket();
                 Event event = eventRepository.findEventById(eid);
                 printableTicket.setId(event.getId());
@@ -203,9 +214,8 @@ public class TicketBuyerController {
                 printableTicket.setStartdate(event.getStartdate());
                 printableTicket.setTitleofevent(event.getTitleofevent());
                 printableTicket.setOrganizer(ticketSellerRepository.findOrgNameById(event.getTicketsellerid()));
-
                 printableTickets.add(printableTicket);
-            }
+            });
 
             model.addAttribute("ticketbuyer", tb);
             model.addAttribute("printabletickets", printableTickets);
@@ -219,7 +229,7 @@ public class TicketBuyerController {
         List<Integer> eventid = ticketRepository.findEventsByBuyerId(ticketBuyerId);
         List<PrintableTicket> printableTickets = new ArrayList<>();
 
-        for (Integer eid : eventid) {
+        eventid.forEach(eid -> {
             PrintableTicket printableTicket = new PrintableTicket();
             Event event = eventRepository.findEventById(eid);
             printableTicket.setId(event.getId());
@@ -232,9 +242,8 @@ public class TicketBuyerController {
             printableTicket.setStartdate(event.getStartdate());
             printableTicket.setTitleofevent(event.getTitleofevent());
             printableTicket.setOrganizer(ticketSellerRepository.findOrgNameById(event.getTicketsellerid()));
-
             printableTickets.add(printableTicket);
-        }
+        });
 
         model.addAttribute("ticketbuyer", ticketBuyer1);
         model.addAttribute("printabletickets", printableTickets);

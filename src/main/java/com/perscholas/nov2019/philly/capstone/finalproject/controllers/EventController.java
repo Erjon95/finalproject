@@ -42,14 +42,6 @@ public class EventController {
         return "index";
     }
 
-    /*@PostMapping(path = "/")
-    public String test(Model model, TicketBuyer ticketBuyer){
-        model.addAttribute("event", new Event());
-        TicketBuyerController.ticketBuyerId = ticketBuyerRepository.findBuyerId(ticketBuyer.getEmail());
-        System.out.println(TicketBuyerController.ticketBuyerId);
-        return "index";
-    }*/
-
     @PostMapping(path = "/search_result")
     public String searchEvents(Event event, Model model) {
 

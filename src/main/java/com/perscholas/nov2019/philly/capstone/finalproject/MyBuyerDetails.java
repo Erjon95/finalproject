@@ -10,20 +10,23 @@ import java.util.Collection;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class MyUserDetails implements UserDetails {
+public class MyBuyerDetails implements UserDetails {
     String email;
     String password;
     List<GrantedAuthority> grantedAuthorities;
 
-    public MyUserDetails(){}
+    public MyBuyerDetails(){}
 
-    public MyUserDetails(TicketBuyer ticketBuyer)
+    public MyBuyerDetails(TicketBuyer ticketBuyer)
     {
-        email = ticketBuyer.getEmail();
-        password = ticketBuyer.getPassword();
-        grantedAuthorities = Arrays.asList(new SimpleGrantedAuthority(ticketBuyer.getRole()));
+        try {
+            email = ticketBuyer.getEmail();
+            password = ticketBuyer.getPassword();
+            grantedAuthorities = Arrays.asList(new SimpleGrantedAuthority(ticketBuyer.getRole()));
+        }catch (NullPointerException npe){
+            System.out.println("NullPointerException: email not found");
+        }
     }
-
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
