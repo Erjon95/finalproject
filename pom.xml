@@ -16,7 +16,7 @@
 	<description>Final Project for the Nov. 2019 Perscholas Java Cohort in Philly</description>
 
 	<properties>
-		<java.version>13</java.version>
+		<java.version>8</java.version>
 	</properties>
 
 	<dependencies>

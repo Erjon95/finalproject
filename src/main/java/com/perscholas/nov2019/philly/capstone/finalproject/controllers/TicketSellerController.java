@@ -69,7 +69,7 @@ public class TicketSellerController {
             String hashedPwd = sellerService.hashPassword(ticketSeller.getPassword());
 
             try {
-                ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd, "SELLER");
+                ticketSellerRepository.registerSeller(ticketSeller.getOrgname(), ticketSeller.getOrgaddress(), ticketSeller.getWebaddress(), ticketSeller.getContactfirstname(), ticketSeller.getContactlastname(), ticketSeller.getContactemail(), ticketSeller.getContactphone(), hashedPwd);
             } catch (Exception e) {
                 e.printStackTrace();
             }
