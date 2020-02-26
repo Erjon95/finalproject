@@ -14,7 +14,7 @@ There are three roles in this app. They are the ticketsellers, the ticket buyers
 Database
 
 
-I am using MariaDB for the database. It is called "ticketplatform" in this app. It consists of four tables: event, ticketbuyer, ticketseller, and ticket.
+I used MariaDB for the database. It is called "ticketplatform" in this app. It consists of four tables: event, ticketbuyer, ticketseller, and ticket.
 
 The event table stores the events that ticket sellers upload into the marketplace.
 
@@ -45,3 +45,8 @@ Running the app
 
 
 The index page can be viewed at "localhost:8080/".  
+
+To register a new buyer, visit localhost:8080/register-buyer. To edit the fields of a buyer, visit localhost:8080/edit-buyer after logging in, or click on
+the "edit" button in the "user info" section of the "account" page.
+
+To register a new seller, visit localhost:8080/register-seller.
