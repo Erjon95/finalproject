@@ -16,17 +16,17 @@ Database
 
 I used MariaDB for the database. It is called "ticketplatform" in this app. It consists of four tables: event, ticketbuyer, ticketseller, and ticket.
 
-The event table stores the events that ticket sellers upload into the marketplace.
+The "event" table stores the events that ticket sellers upload into the marketplace.
 
-The ticket table stores the relationship between the ticket buyers and the tickets that they have purchased.
+The "ticket" table stores the relationship between the ticket buyers and the tickets that they have purchased.
 
-The ticketbuyer table stores the information of ticketbuyers.
+The "ticketbuyer" table stores the information of ticketbuyers.
 
-The ticketseller table stores the information of the ticketsellers.
+The "ticketseller" table stores the information of the ticketsellers.
 
 The database schema, as well as the insert statements that I used to test the app, can be found in the "ticketplatform.sql" file.
 
-The password and username of the database are set to "" and "root" respectively, but they can be changed in the application.properties file.
+The password and username of the database user are set to "" and "root" respectively. They can be changed in the application.properties file.
 
 
 Packaging
@@ -46,9 +46,9 @@ Running the app
 
 The index page can be viewed at "localhost:8080/".  
 
-To register a new buyer, visit localhost:8080/register-buyer. To edit the fields of a buyer, visit localhost:8080/edit-buyer after logging in, or click on
+To register a new buyer, visit "localhost:8080/register-buyer." To edit the fields of a buyer, "visit localhost:8080/edit-buyer" after logging in, or click on
 the "edit" button in the "user info" section of the "account" page.
 
-To register a new seller, visit localhost:8080/register-seller.
+To register a new seller, visit "localhost:8080/register-seller."
 
-To upload an event as a seller, visit localhost:8080/upload_event.
+To upload an event as a seller, "visit localhost:8080/upload_event."
