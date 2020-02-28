@@ -79,6 +79,10 @@
 	<form action = "#" th:action="@{/seller-account}" th:object="${event}"method = "post">
 		<table>
 			<tr>
+				<td align = "left">Ticket Seller Id:</td>
+				<td><input type="text" th:field="*{ticketsellerid}" required></td>
+			</tr>
+			<tr>
 				<td align = "left">Title Of Event:</td>
 				<td><input type="text" th:field="*{titleofevent}" required></td>
 			</tr>
@@ -116,17 +120,6 @@
 		</table>
 	</form> 
     </div>
-	<div class = "dropdown" style = "position: relative; margin-left: 200px">
-		<input type = "submit" value = "Menu" class = "dropbtn">
-		<div class="dropdown-content">
-			<a href="seller-account">Account</a>
-			<a href="edit-seller">Edit Info</a>
-			<form th:action="@{/logout}" method="post">
-				<input type="submit" value="Log Out"/>
-			</form>
-
-		</div>
-	</div>
 </div>
 
 

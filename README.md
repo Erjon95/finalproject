@@ -50,3 +50,5 @@ To register a new buyer, visit localhost:8080/register-buyer. To edit the fields
 the "edit" button in the "user info" section of the "account" page.
 
 To register a new seller, visit localhost:8080/register-seller.
+
+To upload an event as a seller, visit localhost:8080/upload_event.

@@ -122,13 +122,11 @@ public class TicketSellerController {
     /********************************************************************************************************************************************************************************************************/
     @GetMapping(path = "/upload_event")
     public String uploadEvent(Model model) {
-        if (ticketSellerId != -1) {
+
             uploadEvent = true;
             model.addAttribute("event", new Event());
 
             return "upload_event";
-        }
-        return "sellerlogout";
     }
     /*********************************************************************************************************************************************************************************************************************************************************************/
 
@@ -136,9 +134,9 @@ public class TicketSellerController {
 
     /**********************************************************************************************************************************************************************************************************/
     @GetMapping(path = "/seller-account")
-    public String accountSeller(Model model, HttpServletRequest httpServletRequest) {
+    public String accountSeller(Model model, Event event) {
 
-        TicketSeller ticketSeller = ticketSellerRepository.findSellerByOrgName(httpServletRequest.getRemoteUser());
+        TicketSeller ticketSeller = ticketSellerRepository.findSellerById(ticketSellerId);
 
         List<Event> events = eventRepository.findEventsBySellerId(ticketSeller.getId());
 
@@ -159,7 +157,6 @@ public class TicketSellerController {
    public String sellerAccount (Model model, @ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event, @RequestParam(value = "delete", required = false) Integer eventId) {
 
        if (editSeller) {
-           ticketSellerId = ticketSeller.getId();
            if (!sellerService.isEmpty(ticketSeller, ticketSellerId, ticketSellerRepository))
                ticketSeller.setPassword(sellerService.hashPassword(ticketSeller.getPassword()));
 
@@ -176,9 +173,10 @@ public class TicketSellerController {
 
        if (uploadEvent)
        {
-           eventRepository.insertEvent(ticketSellerId, event.getTitleofevent(), event.getPlaceofevent(), event.getDescription(), event.getStartdate(), event.getEnddate(), event.getLocaltimeofshow(), event.getPriceofticket(), event.getNumberoftickets());
-           List<Event> events = eventRepository.findEventsBySellerId(ticketSellerId);
-           TicketSeller ticketSeller1 = ticketSellerRepository.findSellerById(ticketSellerId);
+           ticketSellerId = event.getTicketsellerid();
+           eventRepository.insertEvent(event.getTicketsellerid(), event.getTitleofevent(), event.getPlaceofevent(), event.getDescription(), event.getStartdate(), event.getEnddate(), event.getLocaltimeofshow(), event.getPriceofticket(), event.getNumberoftickets());
+           List<Event> events = eventRepository.findEventsBySellerId(event.getTicketsellerid());
+           TicketSeller ticketSeller1 = ticketSellerRepository.findSellerById(event.getTicketsellerid());
            model.addAttribute("events", events);
            model.addAttribute("ticketseller", ticketSeller1);
            uploadEvent = false;
@@ -206,7 +204,7 @@ public class TicketSellerController {
 
        eventRepository.deleteEventByEventId(eventId);
        TicketSeller ticketSeller1 = ticketSellerRepository.findSellerById(ticketSellerId);
-       List<Event> events = eventRepository.findEventsBySellerId(ticketSellerId);
+       List<Event> events = eventRepository.findEventsBySellerId(ticketSeller1.getId());
        model.addAttribute("events", events);
        model.addAttribute("ticketseller", ticketSeller1);
 
