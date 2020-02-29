@@ -211,4 +211,11 @@ public class TicketSellerController {
        return "seller-account";
    }
     /*****************************************************************************************************************************************************************************************************************************************************************************************************************/
+
+    @ExceptionHandler({Exception.class})
+    public String error() {
+        // Nothing to do.  Returns the logical view name of an error page, passed
+        // to the view-resolver(s) in usual way.
+        return "error";
+    }
 }
