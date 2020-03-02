@@ -52,3 +52,5 @@ the "edit" button in the "user info" section of the "account" page.
 To register a new seller, visit "localhost:8080/register-seller."
 
 To upload an event as a seller, "visit localhost:8080/upload_event." The value of the "Ticket Seller Id" field must match an id from the "ticketseller" table.
+
+Every value of the "start date," "end date," and "time of show" fields in the "event" table is set to "2020-01-10," "2020-01-20," and "10:00:00" respectively for ease of testing.
