@@ -44,7 +44,7 @@ The encryption strength can be changed in the "WebSecurityConfigBuyer" file.
 Running the app
 
 
-The index page can be viewed at "localhost:8080/." (The values of the "search" fields correspond to the values in the "event" table.) 
+The index page can be viewed at "localhost:8080/."
 
 To register a new buyer, visit "localhost:8080/register-buyer." To edit the fields of a buyer, "visit localhost:8080/edit-buyer" after logging in, or click on the "edit" button in the "user info" section of the "account" page.
 
