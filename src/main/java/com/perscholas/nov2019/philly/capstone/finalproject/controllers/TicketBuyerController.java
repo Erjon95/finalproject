@@ -98,7 +98,7 @@ public class TicketBuyerController {
     @GetMapping(path = "/login-buyer")
     public String setUpLoginForBuyer(Model model) {
         model.addAttribute("ticketbuyer", new TicketBuyer());
-        return "/login-buyer";
+        return "login-buyer";
     }
     /***************************************************************************************************************************/
 
