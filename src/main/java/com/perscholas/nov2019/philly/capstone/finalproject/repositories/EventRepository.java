@@ -11,13 +11,13 @@ import java.util.List;
 
 public interface EventRepository extends CrudRepository<Event, Integer> {
 
-    @Query(value = "select * from Event e where e.titleofevent like %?1% and e.placeofevent like %?2% and e.description like %?3% and e.startdate like %?4% and e.enddate like %?5% and e.localtimeofshow like %?6%", nativeQuery = true)
+    @Query("select e from Event e where e.titleofevent like %?1% and e.placeofevent like %?2% and e.description like %?3% and e.startdate like %?4% and e.enddate like %?5% and e.localtimeofshow like %?6%")
     List<Event> findEvents(String titleOfEvent, String placeOfEvent, String description, String startDate, String endDate, String localTimeOfShow);
 
-    @Query(value = "select * from Event e where e.id = ?1", nativeQuery = true)
+    @Query("select e from Event e where e.id = ?1")
     Event findEventById(@Param("id") Integer id);
 
-    @Query(value = "select * from Event e where e.ticketsellerid = ?1", nativeQuery = true)
+    @Query("select e from Event e where e.ticketsellerid = ?1")
     List<Event> findEventsBySellerId(@Param("ticketsellerid") Integer ticketSellerId);
 
     @Query("select e.ticketsellerid from Event e where e.id = ?1")
@@ -30,6 +30,6 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
 
     @Transactional
     @Modifying
-    @Query(value = "delete from event where id = ?1", nativeQuery = true)
+    @Query("delete from event where id = ?1")
     void deleteEventByEventId(@Param("id") Integer eventId);
 }
