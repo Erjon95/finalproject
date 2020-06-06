@@ -44,10 +44,10 @@ public interface TicketSellerRepository extends CrudRepository<TicketSeller, Int
     @Query(value = "select ts.webaddress from TicketSeller ts where ts.id = ?1")
     String findWebAddressById(Integer id);
 
-    @Transactional
+    /*@Transactional
     @Modifying
     @Query(value = "insert into ticketseller(orgname, orgaddress, webaddress, contactfirstname, contactlastname, contactemail, contactphone, password) values(:orgname, :orgaddress, :webaddress, :contactfirstname, :contactlastname, :contactemail, :contactphone, :password)", nativeQuery = true)
-    void registerSeller(@Param("orgname") String orgname, @Param("orgaddress") String orgaddress, @Param("webaddress") String webaddress, @Param("contactfirstname") String contactfirstname, @Param("contactlastname") String contactlastname, @Param("contactemail") String contactemail, @Param("contactphone") String contactphone, @Param("password") String password);
+    void registerSeller(@Param("orgname") String orgname, @Param("orgaddress") String orgaddress, @Param("webaddress") String webaddress, @Param("contactfirstname") String contactfirstname, @Param("contactlastname") String contactlastname, @Param("contactemail") String contactemail, @Param("contactphone") String contactphone, @Param("password") String password);*/
 
     @Transactional
     @Modifying

@@ -41,10 +41,10 @@ public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integ
     @Query(value = "select tb.password from TicketBuyer tb where tb.id = ?1")
     String findPassword(Integer id);
 
-    @Transactional
+    /*@Transactional
     @Modifying
     @Query(value = "insert into ticketbuyer(firstname, lastname, address, email, phone, password, role) values(:firstname, :lastname, :address, :email, :phone, :password, :role)", nativeQuery = true)
-    void registerBuyer(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("address") String address, @Param("email") String email, @Param("phone") String phone, @Param("password") String password, @Param("role") String role);
+    void registerBuyer(@Param("firstname") String firstname, @Param("lastname") String lastname, @Param("address") String address, @Param("email") String email, @Param("phone") String phone, @Param("password") String password, @Param("role") String role);*/
 
     @Transactional
     @Modifying
