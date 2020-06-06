@@ -57,7 +57,7 @@ public class TicketSellerController {
         return "register-seller";
     }
 
-    @PostMapping(path = "/register-seller")
+    /*@PostMapping(path = "/register-seller")
     public String registerSeller(@ModelAttribute("ticketseller") TicketSeller ticketSeller, Model model) {
         List<TicketSeller> lt = ticketSellerRepository.findSellers();
 
@@ -79,7 +79,7 @@ public class TicketSellerController {
             model.addAttribute("isThere", ute.isThere());
             return "register-seller";
         }
-    }
+    }*/
 
     /*@GetMapping(path = "/error/register-seller")
     public String setUpRegistrationAgainSeller(Model model) {
@@ -153,7 +153,7 @@ public class TicketSellerController {
         return "edit-seller";
     }
 
-   @PostMapping(path = "/seller-account")
+   /*@PostMapping(path = "/seller-account")
    public String sellerAccount (Model model, @ModelAttribute("ticketseller") TicketSeller ticketSeller, @ModelAttribute("event") Event event, @RequestParam(value = "delete", required = false) Integer eventId) {
 
        if (editSeller) {
@@ -209,7 +209,7 @@ public class TicketSellerController {
        model.addAttribute("ticketseller", ticketSeller1);
 
        return "seller-account";
-   }
+   }*/
     /*****************************************************************************************************************************************************************************************************************************************************************************************************************/
 
     @ExceptionHandler({Exception.class})

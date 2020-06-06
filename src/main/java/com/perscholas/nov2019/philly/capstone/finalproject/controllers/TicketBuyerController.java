@@ -63,7 +63,7 @@ public class TicketBuyerController {
         return "register-buyer";
     }
 
-    @PostMapping(path = "/register-buyer")
+    /*@PostMapping(path = "/register-buyer")
     public String registerBuyer(@ModelAttribute("ticketbuyer") TicketBuyer ticketBuyer, Model model) {
 
         try {
@@ -89,7 +89,7 @@ public class TicketBuyerController {
             model.addAttribute("isThere", ute.isThere());
             return "register-buyer";
         }
-    }
+    }*/
     /*******************************************************************************************************************************************************************************************/
 
     // A ticket buyer logs in.
@@ -105,7 +105,7 @@ public class TicketBuyerController {
     //A ticket buyer buys a ticket
 
     /*****************************************************************************************************************************************************************/
-    @PostMapping(path = "/buy_result")
+    /*@PostMapping(path = "/buy_result")
     public String buyResult(@RequestParam("eventid") Integer eventId, Model model) {
 
         Integer ticketSellerId = eventRepository.findSellerId(eventId);
@@ -130,7 +130,7 @@ public class TicketBuyerController {
         isTicketBought = false;
 
         return "index";
-    }
+    }*/
     /******************************************************************************************************************************************************************/
 
     //Buyers visit their "account" page
