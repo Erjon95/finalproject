@@ -11,16 +11,16 @@ import java.util.List;
 
 public interface TicketBuyerRepository extends CrudRepository<TicketBuyer, Integer> {
 
-    @Query(value = "select tb.id from TicketBuyer tb where tb.email = ?1")
+    @Query("select tb.id from TicketBuyer tb where tb.email = ?1")
     Integer findBuyerId(String email);
 
-    @Query(value = "select tb from TicketBuyer tb where tb.id = ?1")
+    @Query("select tb from TicketBuyer tb where tb.id = ?1")
     TicketBuyer findBuyerById(Integer id);
 
-    @Query(value = "select tb from TicketBuyer tb where tb.email = ?1")
+    @Query("select tb from TicketBuyer tb where tb.email = ?1")
     TicketBuyer findBuyerByEmail(String email);
 
-    @Query(value = "select tb from TicketBuyer tb")
+    @Query("select tb from TicketBuyer tb")
     List<TicketBuyer> findBuyers();
 
     @Query(value = "select tb.firstname from TicketBuyer tb where tb.id = ?1")

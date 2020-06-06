@@ -30,6 +30,6 @@ public interface EventRepository extends CrudRepository<Event, Integer> {
 
     @Transactional
     @Modifying
-    @Query("delete from event where id = ?1")
+    @Query("delete from Event e where e.id = ?1")
     void deleteEventByEventId(@Param("id") Integer eventId);
 }

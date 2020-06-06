@@ -28,7 +28,7 @@ public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
     @Transactional
     @Modifying
-    @Query("delete from ticket t where t.eventid = ?1")
+    @Query("delete from Ticket t where t.eventid = ?1")
     void deleteTicketByEventId(@Param("id") Integer eventId);
 
 }
