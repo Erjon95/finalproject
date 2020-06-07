@@ -37,7 +37,7 @@ CREATE TABLE `event` (
   `timestamp` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id`),
   KEY `fk_event_ticketseller` (`ticketsellerid`),
-  CONSTRAINT `fk_event_ticketseller` FOREIGN KEY (`ticketsellerid`) REFERENCES `ticketseller` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_event_ticketseller` FOREIGN KEY (`ticketsellerid`) REFERENCES `ticket_seller` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -70,7 +70,7 @@ CREATE TABLE `ticket` (
   KEY `fk_ticket_event` (`eventid`),
   CONSTRAINT `fk_ticket_event` FOREIGN KEY (`eventid`) REFERENCES `event` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ticket_ticketbuyer` FOREIGN KEY (`ticketbuyerid`) REFERENCES `ticket_buyer` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_ticket_ticketseller` FOREIGN KEY (`ticketsellerid`) REFERENCES `ticketseller` (`id`) ON DELETE CASCADE
+  CONSTRAINT `fk_ticket_ticketseller` FOREIGN KEY (`ticketsellerid`) REFERENCES `ticket_seller` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -115,13 +115,13 @@ INSERT INTO `ticket_buyer` VALUES (18,'buyerAfirst','buyerAlast','addressBuyerA'
 UNLOCK TABLES;
 
 --
--- Table structure for table `ticketseller`
+-- Table structure for table `ticket_seller`
 --
 
-DROP TABLE IF EXISTS `ticketseller`;
+DROP TABLE IF EXISTS `ticket_seller`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ticketseller` (
+CREATE TABLE `ticket_seller` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `orgname` varchar(30) NOT NULL,
   `orgaddress` varchar(50) NOT NULL,
@@ -136,13 +136,13 @@ CREATE TABLE `ticketseller` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ticketseller`
+-- Dumping data for table `ticket_seller`
 --
 
-LOCK TABLES `ticketseller` WRITE;
-/*!40000 ALTER TABLE `ticketseller` DISABLE KEYS */;
-INSERT INTO `ticketseller` VALUES (6,'companyA','addressA','webaddressA','contactfirstA','contactlastA','email@companyA','+11111111111','$2a$10$h9yVhpXxR6YGF9gk5qWdRO3EZ5aA4pnVusXqWsnHwHLsVAyUTNwZq'),(7,'companyB','addressB','webaddressB','contactfirstB','contactlastB','email@companyB','+2222222222','$2a$10$juKVVQUJpORoekv75jqR.uJ1V8h90enMW79iQ4umbx78TJsx9x6uq'),(8,'companyC','addressC','webaddressC','contactfirstC','contactlastC','email@companyC','3333333333','$2a$10$TnysK3uQTxDf8amqZWrEle915nOxFyQNcwmx8337/THVphTffmu6W'),(9,'companyD','addressD','webaddressD','contactfirstD','contactlastD','email@companyD','4444444444','$2a$10$f4UFxdZhx2ezFgoVfIgU0uOpqHWxfDmFBUJ/HkM2VGPowcRVP2BoO'),(10,'companyE','addressE','webaddressE','contactfirstE','contactlastE','email@companyE','5555555555','$2a$10$egqf/aA90TGycKiplFuh.OeD64oRGhRLiXZ6OyNEoFYeWLYRwDdje'),(11,'companyF','addressF','webaddressF','contactfirstF','contactlastF','email@companyF','6666666666','$2a$10$OHCIULfNdpyyPNIEnsHLNeTh875qw7LztWIKqjGl/XckplJHG7BV.'),(12,'companyG','addressG','webaddressG','contactfirstG','contactlastG','email@companyG','7777777777','$2a$10$eG03.1veb/zu7BeyWYN91..RFYWp1wRndTE2AqsM93p.MsX68zJem'),(13,'companyH','addressH','webaddressH','contactfirstH','contactlastH','email@companyH','8888888888','$2a$10$VGcO5.u8uf9uGEFZvWjAUe63wdo4ZV1SgMfQvg8LijNJ7U6HyjITe'),(14,'companyI','addressI','webaddressI','contactfirstI','contactlastI','email@companyI','9999999999','$2a$10$J9plN9TLYu6cUH6B57ZM1OqP5LHqCl4koH.EaZFmSMyg0CCjthvcK'),(15,'companyJ','addressJ','webaddressJ','contactfirstJ','contactlastJ','email@companyJ','1234567890','$2a$10$yY8RmM5cTOoZs49mPZQ7K.bPCCOsxdzKtE9Xd.SCqcbSIwgkbqPv6');
-/*!40000 ALTER TABLE `ticketseller` ENABLE KEYS */;
+LOCK TABLES `ticket_seller` WRITE;
+/*!40000 ALTER TABLE `ticket_seller` DISABLE KEYS */;
+INSERT INTO `ticket_seller` VALUES (6,'companyA','addressA','webaddressA','contactfirstA','contactlastA','email@companyA','+11111111111','$2a$10$h9yVhpXxR6YGF9gk5qWdRO3EZ5aA4pnVusXqWsnHwHLsVAyUTNwZq'),(7,'companyB','addressB','webaddressB','contactfirstB','contactlastB','email@companyB','+2222222222','$2a$10$juKVVQUJpORoekv75jqR.uJ1V8h90enMW79iQ4umbx78TJsx9x6uq'),(8,'companyC','addressC','webaddressC','contactfirstC','contactlastC','email@companyC','3333333333','$2a$10$TnysK3uQTxDf8amqZWrEle915nOxFyQNcwmx8337/THVphTffmu6W'),(9,'companyD','addressD','webaddressD','contactfirstD','contactlastD','email@companyD','4444444444','$2a$10$f4UFxdZhx2ezFgoVfIgU0uOpqHWxfDmFBUJ/HkM2VGPowcRVP2BoO'),(10,'companyE','addressE','webaddressE','contactfirstE','contactlastE','email@companyE','5555555555','$2a$10$egqf/aA90TGycKiplFuh.OeD64oRGhRLiXZ6OyNEoFYeWLYRwDdje'),(11,'companyF','addressF','webaddressF','contactfirstF','contactlastF','email@companyF','6666666666','$2a$10$OHCIULfNdpyyPNIEnsHLNeTh875qw7LztWIKqjGl/XckplJHG7BV.'),(12,'companyG','addressG','webaddressG','contactfirstG','contactlastG','email@companyG','7777777777','$2a$10$eG03.1veb/zu7BeyWYN91..RFYWp1wRndTE2AqsM93p.MsX68zJem'),(13,'companyH','addressH','webaddressH','contactfirstH','contactlastH','email@companyH','8888888888','$2a$10$VGcO5.u8uf9uGEFZvWjAUe63wdo4ZV1SgMfQvg8LijNJ7U6HyjITe'),(14,'companyI','addressI','webaddressI','contactfirstI','contactlastI','email@companyI','9999999999','$2a$10$J9plN9TLYu6cUH6B57ZM1OqP5LHqCl4koH.EaZFmSMyg0CCjthvcK'),(15,'companyJ','addressJ','webaddressJ','contactfirstJ','contactlastJ','email@companyJ','1234567890','$2a$10$yY8RmM5cTOoZs49mPZQ7K.bPCCOsxdzKtE9Xd.SCqcbSIwgkbqPv6');
+/*!40000 ALTER TABLE `ticket_seller` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -154,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-06 22:42:17
+-- Dump completed on 2020-06-06 22:53:04
