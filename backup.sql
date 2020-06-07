@@ -69,7 +69,7 @@ CREATE TABLE `ticket` (
   KEY `fk_ticket_ticketseller` (`ticketsellerid`),
   KEY `fk_ticket_event` (`eventid`),
   CONSTRAINT `fk_ticket_event` FOREIGN KEY (`eventid`) REFERENCES `event` (`id`) ON DELETE CASCADE,
-  CONSTRAINT `fk_ticket_ticketbuyer` FOREIGN KEY (`ticketbuyerid`) REFERENCES `ticketbuyer` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `fk_ticket_ticketbuyer` FOREIGN KEY (`ticketbuyerid`) REFERENCES `ticket_buyer` (`id`) ON DELETE CASCADE,
   CONSTRAINT `fk_ticket_ticketseller` FOREIGN KEY (`ticketsellerid`) REFERENCES `ticketseller` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -85,13 +85,13 @@ INSERT INTO `ticket` VALUES (12,18,17,7,'2020-03-10 16:17:50'),(13,24,21,11,'202
 UNLOCK TABLES;
 
 --
--- Table structure for table `ticketbuyer`
+-- Table structure for table `ticket_buyer`
 --
 
-DROP TABLE IF EXISTS `ticketbuyer`;
+DROP TABLE IF EXISTS `ticket_buyer`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `ticketbuyer` (
+CREATE TABLE `ticket_buyer` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `firstname` varchar(30) NOT NULL,
   `lastname` varchar(30) NOT NULL,
@@ -105,13 +105,13 @@ CREATE TABLE `ticketbuyer` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `ticketbuyer`
+-- Dumping data for table `ticket_buyer`
 --
 
-LOCK TABLES `ticketbuyer` WRITE;
-/*!40000 ALTER TABLE `ticketbuyer` DISABLE KEYS */;
-INSERT INTO `ticketbuyer` VALUES (18,'buyerAfirst','buyerAlast','addressBuyerA','email@buyerA','111111111111','$2a$10$g0kKHSghhDyEhMDQZ0jKDuQwRMHHdaTvP.a2rAeHFoKq6Rm0bptzG','BUYER'),(19,'buyerBfirst','buyerBlast','addressBuyerB','email@buyerB','2222222222','$2a$10$Iw2Aiv6A8N9s5fvIczjt2uGWznVF3bTSnzeWNalAOTizINzl44Oym','BUYER'),(20,'buyerCfirst','buyerClast','addressBuyerC','email@buyerC','3333333333','$2a$10$4b124dXamerLeZCi3gSSj.JHcn503N6WP06UIo5dCEXFMkuEiPsdG','BUYER'),(21,'buyerDfirst','buyerDlast','addressBuyerD','email@buyerD','4444444444','$2a$10$A.scFwf7.zCCT0T8yWvzgu..4IFh/yxS7qa5MqgMhjH1eHUoVuhni','BUYER'),(22,'buyerEfirst','buyerElast','addressBuyerE','email@buyerE','5555555555','$2a$10$LW3b/3NPbCpHUMuJ8BZI8ettgPGUiVD0PK4EaQnJfZTbVwf2rYeSW','BUYER'),(23,'buyerFfirst','buyerFlast','addressBuyerF','email@buyerF','6666666666','$2a$10$Nwvnj71/D9s2z4Sv2Zb5yO./0QBXr/Yi79vaCYm6XumVkHKa/FREe','BUYER'),(24,'buyerGfirst','buyerGlast','addressBuyerG','email@buyerG','7777777777','$2a$10$A0GIMlqIZBSIUr2.x96xc.sR.CbGA3tmt3PGhiMaOkza7YtWj16MW','BUYER'),(25,'buyerHfirst','buyerHlast','addressBuyerH','email@buyerH','8888888888','$2a$10$LIZLgwo351kQY1uto2.kL.V1S/mWRcdjMDipENp7ZyDKYfC9ZZS5.','BUYER'),(26,'buyerIfirst','buyerIlast','addressBuyerI','email@buyerI','9999999999','$2a$10$.qXIGqlklMeHirZDwIFhS.OCmmmtCL95qyf94G/6bonaqKVLUi38q','BUYER'),(27,'buyerJfirst','buyerJlast','addressBuyerJ','email@buyerJ','1234567890','$2a$10$pPLOMuq9yU0AWh34Ju/Uxut.J6fxDuslccgiPmLRdxX4DJUieXTbG','BUYER'),(28,'buyer','buyer','address','email@buyer.com','1111111111','$2a$10$pAUJoRhX4ajlcqqIYe0cDuR7dKahzZCge.OcnQO2NpcxnZEjvhPRe','BUYER');
-/*!40000 ALTER TABLE `ticketbuyer` ENABLE KEYS */;
+LOCK TABLES `ticket_buyer` WRITE;
+/*!40000 ALTER TABLE `ticket_buyer` DISABLE KEYS */;
+INSERT INTO `ticket_buyer` VALUES (18,'buyerAfirst','buyerAlast','addressBuyerA','email@buyerA','111111111111','$2a$10$g0kKHSghhDyEhMDQZ0jKDuQwRMHHdaTvP.a2rAeHFoKq6Rm0bptzG','BUYER'),(19,'buyerBfirst','buyerBlast','addressBuyerB','email@buyerB','2222222222','$2a$10$Iw2Aiv6A8N9s5fvIczjt2uGWznVF3bTSnzeWNalAOTizINzl44Oym','BUYER'),(20,'buyerCfirst','buyerClast','addressBuyerC','email@buyerC','3333333333','$2a$10$4b124dXamerLeZCi3gSSj.JHcn503N6WP06UIo5dCEXFMkuEiPsdG','BUYER'),(21,'buyerDfirst','buyerDlast','addressBuyerD','email@buyerD','4444444444','$2a$10$A.scFwf7.zCCT0T8yWvzgu..4IFh/yxS7qa5MqgMhjH1eHUoVuhni','BUYER'),(22,'buyerEfirst','buyerElast','addressBuyerE','email@buyerE','5555555555','$2a$10$LW3b/3NPbCpHUMuJ8BZI8ettgPGUiVD0PK4EaQnJfZTbVwf2rYeSW','BUYER'),(23,'buyerFfirst','buyerFlast','addressBuyerF','email@buyerF','6666666666','$2a$10$Nwvnj71/D9s2z4Sv2Zb5yO./0QBXr/Yi79vaCYm6XumVkHKa/FREe','BUYER'),(24,'buyerGfirst','buyerGlast','addressBuyerG','email@buyerG','7777777777','$2a$10$A0GIMlqIZBSIUr2.x96xc.sR.CbGA3tmt3PGhiMaOkza7YtWj16MW','BUYER'),(25,'buyerHfirst','buyerHlast','addressBuyerH','email@buyerH','8888888888','$2a$10$LIZLgwo351kQY1uto2.kL.V1S/mWRcdjMDipENp7ZyDKYfC9ZZS5.','BUYER'),(26,'buyerIfirst','buyerIlast','addressBuyerI','email@buyerI','9999999999','$2a$10$.qXIGqlklMeHirZDwIFhS.OCmmmtCL95qyf94G/6bonaqKVLUi38q','BUYER'),(27,'buyerJfirst','buyerJlast','addressBuyerJ','email@buyerJ','1234567890','$2a$10$pPLOMuq9yU0AWh34Ju/Uxut.J6fxDuslccgiPmLRdxX4DJUieXTbG','BUYER'),(28,'buyer','buyer','address','email@buyer.com','1111111111','$2a$10$pAUJoRhX4ajlcqqIYe0cDuR7dKahzZCge.OcnQO2NpcxnZEjvhPRe','BUYER');
+/*!40000 ALTER TABLE `ticket_buyer` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -154,4 +154,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-03 20:20:20
+-- Dump completed on 2020-06-06 22:42:17
