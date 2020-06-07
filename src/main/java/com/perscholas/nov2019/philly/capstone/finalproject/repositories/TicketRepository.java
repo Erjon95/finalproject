@@ -12,10 +12,10 @@ import java.util.List;
 
 public interface TicketRepository extends CrudRepository<Ticket, Integer> {
 
-   /* @Transactional
+    @Transactional
     @Modifying
     @Query(value = "insert into ticket(ticketbuyerid, ticketsellerid, eventid) values(:ticketbuyerid, :ticketsellerid, :eventid)", nativeQuery = true)
-    void insertTicket(@Param("ticketbuyerid") Integer ticketbuyerid, @Param("ticketsellerid") Integer ticketsellerid, @Param("eventid") Integer eventid);*/
+    void insertTicket(@Param("ticketbuyerid") Integer ticketbuyerid, @Param("ticketsellerid") Integer ticketsellerid, @Param("eventid") Integer eventid);
 
     @Query (value = "select t.id from Ticket t where t.eventid = ?1 and t.ticketbuyerid = ?2")
     List<Integer> findTicketIdByEventIdAndBuyerId(@Param("eventid") Integer eventId, @Param("ticketbuyerid") Integer ticketBuyerId);
