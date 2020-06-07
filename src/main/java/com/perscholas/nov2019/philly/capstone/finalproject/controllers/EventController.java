@@ -37,7 +37,11 @@ public class EventController {
     @GetMapping(path = "/")
     public String setUpForm(Model model, HttpServletRequest httpServletRequest) {
         model.addAttribute("event", new Event());
-        TicketBuyerController.ticketBuyerId = ticketBuyerRepository.findBuyerId(httpServletRequest.getRemoteUser());
+        try {
+            TicketBuyerController.ticketBuyerId = ticketBuyerRepository.findBuyerId(httpServletRequest.getRemoteUser());
+        }catch (Exception e){
+            TicketBuyerController.ticketBuyerId = -1;
+        }
 
         return "index";
     }
