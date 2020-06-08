@@ -137,13 +137,12 @@ public class TicketBuyerController {
 
     /******************************************************************************************************/
     @GetMapping(path = "/buyer-account")
-    public String accountBuyer(Model model, HttpServletRequest httpServletRequest, TicketBuyer ticketBuyer) {
+    public String accountBuyer(Model model, HttpServletRequest httpServletRequest) {
 
         //ticketBuyerId = ticketBuyerRepository.findBuyerId(httpServletRequest.getRemoteUser());
-        ticketBuyerId = ticketBuyer.getId();
-        System.out.println("This is ticketBuyerId: " + ticketBuyerId);
+        ticketBuyerId = 18;
 
-        TicketBuyer ticketBuyer1 = ticketBuyerRepository.findBuyerById(ticketBuyerId);
+        TicketBuyer ticketBuyer = ticketBuyerRepository.findBuyerById(ticketBuyerId);
 
         List<Integer> eventId = ticketRepository.findEventsByBuyerId(ticketBuyerId);
         List<PrintableTicket> printableTickets = new ArrayList<>();
@@ -164,7 +163,7 @@ public class TicketBuyerController {
             printableTickets.add(printableTicket);
         }
 
-        model.addAttribute("ticketbuyer", ticketBuyer1);
+        model.addAttribute("ticketbuyer", ticketBuyer);
         model.addAttribute("printabletickets", printableTickets);
         editBuyer = false;
 
