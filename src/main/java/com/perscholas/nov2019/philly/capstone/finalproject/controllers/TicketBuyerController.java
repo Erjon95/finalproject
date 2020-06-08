@@ -139,9 +139,8 @@ public class TicketBuyerController {
     @GetMapping(path = "/buyer-account")
     public String accountBuyer(Model model, HttpServletRequest httpServletRequest) {
 
-        //ticketBuyerId = ticketBuyerRepository.findBuyerId(httpServletRequest.getRemoteUser());
-        ticketBuyerId = 18;
-
+        ticketBuyerId = ticketBuyerRepository.findBuyerId(httpServletRequest.getRemoteUser());
+        
         TicketBuyer ticketBuyer = ticketBuyerRepository.findBuyerById(ticketBuyerId);
 
         List<Integer> eventId = ticketRepository.findEventsByBuyerId(ticketBuyerId);
