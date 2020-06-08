@@ -141,6 +141,7 @@ public class TicketBuyerController {
 
         //ticketBuyerId = ticketBuyerRepository.findBuyerId(httpServletRequest.getRemoteUser());
         ticketBuyerId = ticketBuyer.getId();
+        System.out.println("This is ticketBuyerId: " + ticketBuyerId);
 
         TicketBuyer ticketBuyer1 = ticketBuyerRepository.findBuyerById(ticketBuyerId);
 
